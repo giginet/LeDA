@@ -1,0 +1,3 @@
+[submodule "Crowd/static/coffeescript/kwing"]
+	path = Crowd/static/coffeescript/kwing
+	url = git://github.com/giginet/kwing.coffee.git
