@@ -4,7 +4,6 @@ class LogoScene extends Scene
     @kawaz.setImage 'kawaz.png'
     @kawaz.x = 193.5
     @kawaz.y = 220
-    console.log @kawaz
     @kawaz.opacity = 0
     @addChild @kawaz
     @addEventListener 'enterframe', @update
