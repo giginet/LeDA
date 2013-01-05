@@ -7,7 +7,8 @@ class MaWorld extends Game
   FONT : 'Helvetica',
   IMAGE_PATH : '/image/',
   IMAGES : [
-    'kawaz.png'
+    'kawaz.png',
+    'chips/grass.png'
   ],
   SOUND_PATH : '/sound/',
   SOUNDS : [

@@ -9,12 +9,12 @@ class LogoScene extends Scene
     @addEventListener 'enterframe', @update
     @timer = new Timer(180)
     @timer.setComplete ->
-      MaWorld.game.replaceScene(new TitleScene())
+      MaWorld.game.replaceScene(new MainScene())
       @
     @timer.play()
   update : ->
     if MaWorld.game.input.a
-      MaWorld.game.replaceScene(new TitleScene())
+      MaWorld.game.replaceScene(new MainScene())
       @
     @timer.tick()
     if @timer.now() < 60

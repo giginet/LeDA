@@ -10,7 +10,6 @@ class GameObject extends Sprite
     @x += @v.x
     @y += @v.y
   setImage : (fileName) ->
-    console.log "#{MaWorld.config.IMAGE_PATH}#{fileName}"
     @image = MaWorld.game.assets["#{MaWorld.config.IMAGE_PATH}#{fileName}"]
   position : ->
     return new Vector(@x, @y)

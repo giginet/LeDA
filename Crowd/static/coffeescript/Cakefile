@@ -9,6 +9,9 @@ FILES = [
   'kwing/lib/jukebox.coffee',
   'main.coffee',
   'Classes/gameobject.coffee',
+  'Classes/tile.coffee',
+  'Classes/map.coffee',
+  'Classes/mainscene.coffee',
   'Classes/logoscene.coffee',
 ]
 HTMLFILE = 'index.html'

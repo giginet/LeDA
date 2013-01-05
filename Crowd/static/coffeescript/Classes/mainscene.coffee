@@ -1,6 +1,12 @@
 class MainScene extends Scene
-  setup ->
+  constructor : ->
+    super
+    @stage = new Map()
+    @addChild @stage
+    @addEventListener 'enterframe', @update
+
+  setup : ->
     @
 
-  update ->
+  update : ->
     @
