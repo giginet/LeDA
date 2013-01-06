@@ -9,3 +9,8 @@ class Tile extends GameObject
   constructor : ->
     super(Tile.WIDTH, Tile.HEIGHT)
     @setImage "chips/grass.png"
+    @direction = 0
+    @addEventListener "enterframe", @update
+
+  update : (e) ->
+    @rotaiton = @direction * 90

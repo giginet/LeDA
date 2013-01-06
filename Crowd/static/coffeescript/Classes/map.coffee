@@ -16,28 +16,26 @@ class Map extends Group
   getTile : (x, y) ->
     @_map[x][y]
 
+  setTile : (x, y, tile) ->
+    v = @localToGlobal(x, y)
+    tile.x = v.x
+    tile.y = v.y
+    @_map[x][y] = tile
+
   rotate : (x, y, direction) ->
     if x < 0 or x >= @width - 1 or y < 0 or y >= @height
       return null
-    lu = this.getTile(x, y)
-    ld = this.getTile(x, y + 1)
-    ru = this.getTile(x + 1, y)
-    rd = this.getTile(x + 1, y + 1)
+    lu = @getTile(x, y)
+    ld = @getTile(x, y + 1)
+    ru = @getTile(x + 1, y)
+    rd = @getTile(x + 1, y + 1)
     w = lu.width
     h = lu.height
-    lu.originX = w * 1.0
-    lu.originY = h * 1.0
-    ld.originX = w * 1.0
-    ld.originY = 0
-    ru.originX = 0
-    ru.originY = h * 1.0
-    rd.originX = 0
-    rd.originY = 0
-    set = new TileSet(lu, ld, ru, rd, direction)
+    set = new TileSet(@, x, y, direction)
     set
 
   localToGlobal : (x, y) ->
-    @
+    new Vector(x * Tile.WIDTH, y * Tile.HEIGHT)
 
   globalToLocal : (x, y) ->
     new Vector(Math.floor(x / Tile.WIDTH), Math.floor(y / Tile.HEIGHT))
