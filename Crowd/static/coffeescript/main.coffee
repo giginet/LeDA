@@ -8,7 +8,8 @@ class MaWorld extends Game
   IMAGE_PATH : '/image/',
   IMAGES : [
     'kawaz.png',
-    'chips/grass.png'
+    'chips/grass.png',
+    'cursor0.png'
   ],
   SOUND_PATH : '/sound/',
   SOUNDS : [

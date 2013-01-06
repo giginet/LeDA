@@ -4,6 +4,8 @@ TileType =
   Wall : 2
 
 class Tile extends GameObject
+  @WIDTH = 48
+  @HEIGHT = 48
   constructor : ->
-    super(48, 48)
+    super(Tile.WIDTH, Tile.HEIGHT)
     @setImage "chips/grass.png"
