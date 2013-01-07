@@ -8,6 +8,7 @@ class MaWorld extends Game
   IMAGE_PATH : '/image/',
   IMAGES : [
     'kawaz.png',
+    'characters/player.png',
     'chips/grass.png',
     'cursor0.png'
   ],

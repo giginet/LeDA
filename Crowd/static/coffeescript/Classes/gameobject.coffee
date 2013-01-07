@@ -4,14 +4,17 @@ class GameObject extends Sprite
     @removeEventListener 'enterframe'
     @x = x
     @y = y
-    @v = new Vector()
+    @velocity = new Vector()
     @speed = 7
   update : (e) ->
-    @x += @v.x
-    @y += @v.y
+    @x += @velocity.x
+    @y += @velocity.y
   setImage : (fileName) ->
     @image = MaWorld.game.assets["#{MaWorld.config.IMAGE_PATH}#{fileName}"]
-  position : ->
+  getPosition : ->
     return new Vector(@x, @y)
-  center : ->
+  getCenter : ->
     return new Vector(@x + @width / 2, @y + @height / 2)
+  setPosition : (v) ->
+    @x = v.x
+    @y = v.y

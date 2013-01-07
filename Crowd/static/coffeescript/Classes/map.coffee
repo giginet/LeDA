@@ -12,6 +12,9 @@ class Map extends Group
         @addChild tile
     @width = width
     @height = height
+    @player = new Player()
+    @player.setPosition(@localToGlobal(1, 1))
+    @addChild @player
 
   getTile : (x, y) ->
     @_map[x][y]

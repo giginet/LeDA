@@ -9,6 +9,8 @@ FILES = [
   'kwing/lib/jukebox.coffee',
   'main.coffee',
   'Classes/gameobject.coffee',
+  'Classes/character.coffee',
+  'Classes/player.coffee',
   'Classes/tile.coffee',
   'Classes/tileset.coffee',
   'Classes/map.coffee',
