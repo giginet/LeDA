@@ -2,38 +2,40 @@ RotateDirection =
   Left : 0
   Right : 1
 
-class TileSet
+class TileSet extends Group
+  @speed = 10
   constructor : (map, x, y, direction) ->
+    super()
     @map = map
     @lu = @map.getTile(x, y)
     @ld = @map.getTile(x, y + 1)
     @ru = @map.getTile(x + 1, y)
     @rd = @map.getTile(x + 1, y + 1)
+    root = @lu.getPosition().clone()
+    for node in [@lu, @ld, @ru, @rd]
+      @map.removeChild node
+      @addChild node
+      node.x -= root.x
+      node.y -= root.y
+    @map.addChild @
     w = Tile.WIDTH
     h = Tile.HEIGHT
+    @originX = w
+    @originY = h
     @rootx = x
     @rooty = y
-    @lu.originX = w * 1.0
-    @lu.originY = h * 1.0
-    @ld.originX = w * 1.0
-    @ld.originY = 0
-    @ru.originX = 0
-    @ru.originY = h * 1.0
-    @rd.originX = 0
-    @rd.originY = 0
+    @x = root.x
+    @y = root.y
     @count = 0
     @direction = direction
 
-  update : ->
+  update : (e) ->
     if !@isEnd()
       if @direction == RotateDirection.Left
-        speed = -10
+        speed = -TileSet.speed
       else
-        speed = 10
-      @lu.rotation += speed
-      @ld.rotation += speed
-      @ru.rotation += speed
-      @rd.rotation += speed
+        speed = TileSet.speed
+      @rotation += speed
       @count += 1
     if @isEnd()
       if @direction == RotateDirection.Left
@@ -51,5 +53,8 @@ class TileSet
         tile.originX = Tile.WIDTH * 0.5
         tile.originY = Tile.HEIGHT * 0.5
         tile.direction = (tile.direction + 1) % 4
+        @removeChild tile
+        @map.addChild tile
+      @map.removeChild @
   isEnd : ->
-    return @count >= 9
+    return @count >= 90 / TileSet.speed

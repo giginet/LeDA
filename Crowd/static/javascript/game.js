@@ -763,7 +763,6 @@
         return this.timer.setOnUpdate(function() {
           var sub, velocity;
           sub = to.clone().sub(from);
-          console.log("" + sub.x + ", " + sub.y);
           velocity = sub.div(frame);
           obj.x += velocity.x;
           return obj.y += velocity.y;
@@ -856,43 +855,51 @@
     Right: 1
   };
 
-  TileSet = (function() {
+  TileSet = (function(_super) {
+
+    __extends(TileSet, _super);
+
+    TileSet.speed = 10;
 
     function TileSet(map, x, y, direction) {
-      var h, w;
+      var h, node, root, w, _i, _len, _ref;
+      TileSet.__super__.constructor.call(this);
       this.map = map;
       this.lu = this.map.getTile(x, y);
       this.ld = this.map.getTile(x, y + 1);
       this.ru = this.map.getTile(x + 1, y);
       this.rd = this.map.getTile(x + 1, y + 1);
+      root = this.lu.getPosition().clone();
+      _ref = [this.lu, this.ld, this.ru, this.rd];
+      for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+        node = _ref[_i];
+        this.map.removeChild(node);
+        this.addChild(node);
+        node.x -= root.x;
+        node.y -= root.y;
+      }
+      this.map.addChild(this);
       w = Tile.WIDTH;
       h = Tile.HEIGHT;
+      this.originX = w;
+      this.originY = h;
       this.rootx = x;
       this.rooty = y;
-      this.lu.originX = w * 1.0;
-      this.lu.originY = h * 1.0;
-      this.ld.originX = w * 1.0;
-      this.ld.originY = 0;
-      this.ru.originX = 0;
-      this.ru.originY = h * 1.0;
-      this.rd.originX = 0;
-      this.rd.originY = 0;
+      this.x = root.x;
+      this.y = root.y;
       this.count = 0;
       this.direction = direction;
     }
 
-    TileSet.prototype.update = function() {
-      var speed, tile, _i, _len, _ref, _results;
+    TileSet.prototype.update = function(e) {
+      var speed, tile, _i, _len, _ref;
       if (!this.isEnd()) {
         if (this.direction === RotateDirection.Left) {
-          speed = -10;
+          speed = -TileSet.speed;
         } else {
-          speed = 10;
+          speed = TileSet.speed;
         }
-        this.lu.rotation += speed;
-        this.ld.rotation += speed;
-        this.ru.rotation += speed;
-        this.rd.rotation += speed;
+        this.rotation += speed;
         this.count += 1;
       }
       if (this.isEnd()) {
@@ -908,25 +915,27 @@
           this.map.setTile(this.rootx + 1, this.rooty + 1, this.ru);
         }
         _ref = [this.lu, this.ld, this.ru, this.rd];
-        _results = [];
         for (_i = 0, _len = _ref.length; _i < _len; _i++) {
           tile = _ref[_i];
           tile.rotation = 0;
           tile.originX = Tile.WIDTH * 0.5;
           tile.originY = Tile.HEIGHT * 0.5;
-          _results.push(tile.direction = (tile.direction + 1) % 4);
+          tile.direction = (tile.direction + 1) % 4;
+          this.removeChild(tile);
+          this.map.addChild(tile);
         }
-        return _results;
+        console.log("hoge");
+        return this.map.removeChild(this);
       }
     };
 
     TileSet.prototype.isEnd = function() {
-      return this.count >= 9;
+      return this.count >= 90 / TileSet.speed;
     };
 
     return TileSet;
 
-  })();
+  })(Group);
 
   Map = (function(_super) {
 
@@ -1073,12 +1082,9 @@
     MainScene.prototype.moveTo = function(character, direction, frame) {
       var fromTile, local, toTile;
       if (__indexOf.call(this.map.characters, character) >= 0) {
-        console.log("moveTo");
         local = this.map.globalToLocal(character.x, character.y);
         fromTile = this.map.getTile(local.x, local.y);
         toTile = this.map.getTileWithDirection(local, direction);
-        console.log("from:" + (fromTile.getPosition().x) + ", " + (fromTile.getPosition().y));
-        console.log("to:" + (toTile.getPosition().x) + ", " + (toTile.getPosition().y));
         return character.setMoveAnimation(fromTile.getPosition(), toTile.getPosition(), frame);
       }
     };
