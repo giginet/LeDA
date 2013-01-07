@@ -835,11 +835,15 @@
 
     Tile.HEIGHT = 48;
 
-    function Tile() {
+    function Tile(localX, localY) {
       Tile.__super__.constructor.call(this, Tile.WIDTH, Tile.HEIGHT);
       this.setImage("chips/grass.png");
       this.direction = 0;
       this.addEventListener("enterframe", this.update);
+      this.localX = localX;
+      this.localY = localY;
+      this.x = localX * Tile.WIDTH;
+      this.y = localY * Tile.HEIGHT;
     }
 
     Tile.prototype.update = function(e) {
@@ -862,37 +866,44 @@
     TileSet.speed = 10;
 
     function TileSet(map, x, y, direction) {
-      var h, node, root, w, _i, _len, _ref;
+      var character, h, node, w, _i, _j, _len, _len1, _ref, _ref1, _ref2, _ref3;
       TileSet.__super__.constructor.call(this);
       this.map = map;
       this.lu = this.map.getTile(x, y);
       this.ld = this.map.getTile(x, y + 1);
       this.ru = this.map.getTile(x + 1, y);
       this.rd = this.map.getTile(x + 1, y + 1);
-      root = this.lu.getPosition().clone();
+      this.root = this.lu.getPosition().clone();
       _ref = [this.lu, this.ld, this.ru, this.rd];
       for (_i = 0, _len = _ref.length; _i < _len; _i++) {
         node = _ref[_i];
         this.map.removeChild(node);
         this.addChild(node);
-        node.x -= root.x;
-        node.y -= root.y;
+        node.x -= this.root.x;
+        node.y -= this.root.y;
+      }
+      this.characters = [];
+      _ref1 = this.map.characters;
+      for (_j = 0, _len1 = _ref1.length; _j < _len1; _j++) {
+        character = _ref1[_j];
+        if ((this.lu.x <= (_ref2 = character.x) && _ref2 < this.ru.x) && (this.lu.y <= (_ref3 = character.y) && _ref3 < this.ld.y)) {
+          this.characters.push(character);
+          this.map.removeChild(character);
+        }
       }
       this.map.addChild(this);
       w = Tile.WIDTH;
       h = Tile.HEIGHT;
       this.originX = w;
       this.originY = h;
-      this.rootx = x;
-      this.rooty = y;
-      this.x = root.x;
-      this.y = root.y;
+      this.x = this.root.x;
+      this.y = this.root.y;
       this.count = 0;
       this.direction = direction;
     }
 
     TileSet.prototype.update = function(e) {
-      var speed, tile, _i, _len, _ref;
+      var local, rootx, rooty, speed, tile, _i, _len, _ref;
       if (!this.isEnd()) {
         if (this.direction === RotateDirection.Left) {
           speed = -TileSet.speed;
@@ -904,15 +915,18 @@
       }
       if (this.isEnd()) {
         if (this.direction === RotateDirection.Left) {
-          this.map.setTile(this.rootx, this.rooty + 1, this.lu);
-          this.map.setTile(this.rootx, this.rooty, this.ru);
-          this.map.setTile(this.rootx + 1, this.rooty, this.rd);
-          this.map.setTile(this.rootx + 1, this.rooty + 1, this.ld);
+          local = this.map.globalToLocal(this.root.x, this.root.y);
+          rootx = local.x;
+          rooty = local.y;
+          this.map.setTile(rootx, rooty + 1, this.lu);
+          this.map.setTile(rootx, rooty, this.ru);
+          this.map.setTile(rootx + 1, rooty, this.rd);
+          this.map.setTile(rootx + 1, rooty + 1, this.ld);
         } else {
-          this.map.setTile(this.rootx, this.rooty + 1, this.rd);
-          this.map.setTile(this.rootx, this.rooty, this.ld);
-          this.map.setTile(this.rootx + 1, this.rooty, this.lu);
-          this.map.setTile(this.rootx + 1, this.rooty + 1, this.ru);
+          this.map.setTile(rootx, rooty + 1, this.rd);
+          this.map.setTile(rootx, rooty, this.ld);
+          this.map.setTile(rootx + 1, rooty, this.lu);
+          this.map.setTile(rootx + 1, rooty + 1, this.ru);
         }
         _ref = [this.lu, this.ld, this.ru, this.rd];
         for (_i = 0, _len = _ref.length; _i < _len; _i++) {
@@ -924,13 +938,20 @@
           this.removeChild(tile);
           this.map.addChild(tile);
         }
-        console.log("hoge");
         return this.map.removeChild(this);
       }
     };
 
     TileSet.prototype.isEnd = function() {
       return this.count >= 90 / TileSet.speed;
+    };
+
+    TileSet.prototype.globalToNodePosition = function(v) {
+      return v.clone().sub(this.root);
+    };
+
+    TileSet.prototype.nodeToGlobalPosition = function(v) {
+      return v.clone().add(this.root);
     };
 
     return TileSet;
@@ -948,9 +969,7 @@
       for (x = _i = 0; 0 <= width ? _i < width : _i > width; x = 0 <= width ? ++_i : --_i) {
         this._map.push([]);
         for (y = _j = 0; 0 <= height ? _j < height : _j > height; y = 0 <= height ? ++_j : --_j) {
-          tile = new Tile();
-          tile.x = x * 48;
-          tile.y = y * 48;
+          tile = new Tile(x, y);
           this._map[x].push(tile);
           this.addChild(tile);
         }
@@ -970,6 +989,8 @@
     Map.prototype.setTile = function(x, y, tile) {
       var v;
       v = this.localToGlobal(x, y);
+      tile.localX = x;
+      tile.localY = y;
       tile.x = v.x;
       tile.y = v.y;
       return this._map[x][y] = tile;

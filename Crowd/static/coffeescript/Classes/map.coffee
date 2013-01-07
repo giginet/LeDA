@@ -5,9 +5,7 @@ class Map extends Group
     for x in [0...width]
       @_map.push([])
       for y in [0...height]
-        tile = new Tile()
-        tile.x = x * 48
-        tile.y = y * 48
+        tile = new Tile(x, y)
         @_map[x].push tile
         @addChild tile
     @width = width
@@ -22,6 +20,8 @@ class Map extends Group
 
   setTile : (x, y, tile) ->
     v = @localToGlobal(x, y)
+    tile.localX = x
+    tile.localY = y
     tile.x = v.x
     tile.y = v.y
     @_map[x][y] = tile
