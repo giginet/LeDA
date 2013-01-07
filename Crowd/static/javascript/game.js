@@ -745,11 +745,11 @@
     }
 
     MapObject.prototype.update = function(e) {
-      var _ref;
+      var _ref, _ref1;
       if ((_ref = this.timer) != null) {
         _ref.tick();
       }
-      if (this.timer.isOver()) {
+      if ((_ref1 = this.timer) != null ? _ref1.isOver() : void 0) {
         return this;
       }
     };
@@ -789,10 +789,12 @@
       Character.__super__.constructor.call(this, 48, 48);
       this.maxFrame = maxFrame;
       this.fps = 10;
+      this.setDirection(Direction.Right);
     }
 
     Character.prototype.setDirection = function(direction) {
       var array, i, j, root, _i, _j, _ref, _ref1;
+      direction = (direction + 4) % 4;
       root = this.maxFrame * ((direction + 2) % 4);
       array = [];
       for (i = _i = root, _ref = root + this.maxFrame; root <= _ref ? _i < _ref : _i > _ref; i = root <= _ref ? ++_i : --_i) {
@@ -800,7 +802,8 @@
           array.push(i);
         }
       }
-      return this.frame = array;
+      this.frame = array;
+      return this.direction = direction;
     };
 
     return Character;
@@ -866,7 +869,7 @@
     TileSet.speed = 10;
 
     function TileSet(map, x, y, direction) {
-      var character, h, node, w, _i, _j, _len, _len1, _ref, _ref1, _ref2, _ref3;
+      var character, h, local, node, tile, w, _i, _j, _len, _len1, _ref, _ref1, _ref2, _ref3;
       TileSet.__super__.constructor.call(this);
       this.map = map;
       this.lu = this.map.getTile(x, y);
@@ -874,6 +877,7 @@
       this.ru = this.map.getTile(x + 1, y);
       this.rd = this.map.getTile(x + 1, y + 1);
       this.root = this.lu.getPosition().clone();
+      this.end = this.lu.getPosition().clone().add(new Vector(Tile.WIDTH * 2, Tile.HEIGHT * 2));
       _ref = [this.lu, this.ld, this.ru, this.rd];
       for (_i = 0, _len = _ref.length; _i < _len; _i++) {
         node = _ref[_i];
@@ -886,9 +890,13 @@
       _ref1 = this.map.characters;
       for (_j = 0, _len1 = _ref1.length; _j < _len1; _j++) {
         character = _ref1[_j];
-        if ((this.lu.x <= (_ref2 = character.x) && _ref2 < this.ru.x) && (this.lu.y <= (_ref3 = character.y) && _ref3 < this.ld.y)) {
-          this.characters.push(character);
+        if ((this.root.x <= (_ref2 = character.x) && _ref2 < this.end.x) && (this.root.y <= (_ref3 = character.y) && _ref3 < this.end.y)) {
+          local = this.map.globalToLocal(character.getPosition().x, character.getPosition().y);
+          tile = this.map.getTile(local.x, local.y);
+          this.characters.push([character, tile]);
           this.map.removeChild(character);
+          this.addChild(character);
+          character.setPosition(this.globalToNodePosition(character.getPosition()));
         }
       }
       this.map.addChild(this);
@@ -903,7 +911,7 @@
     }
 
     TileSet.prototype.update = function(e) {
-      var local, rootx, rooty, speed, tile, _i, _len, _ref;
+      var array, character, local, rootx, rooty, speed, tile, _i, _j, _len, _len1, _ref, _ref1;
       if (!this.isEnd()) {
         if (this.direction === RotateDirection.Left) {
           speed = -TileSet.speed;
@@ -937,6 +945,20 @@
           tile.direction = (tile.direction + 1) % 4;
           this.removeChild(tile);
           this.map.addChild(tile);
+        }
+        _ref1 = this.characters;
+        for (_j = 0, _len1 = _ref1.length; _j < _len1; _j++) {
+          array = _ref1[_j];
+          character = array[0];
+          tile = array[1];
+          this.removeChild(character);
+          this.map.addChild(character);
+          if (this.direction === RotateDirection.Left) {
+            character.setDirection(character.direction - 1);
+          } else {
+            character.setDirection(character.direction + 1);
+          }
+          character.setPosition(tile.getPosition());
         }
         return this.map.removeChild(this);
       }
@@ -1056,7 +1078,6 @@
       this.addEventListener('touchstart', this.onMousePressed);
       this.addChild(this.cursor);
       this.tileSetQueue = [];
-      this.moveTo(this.map.player, Direction.Up, 10);
     }
 
     MainScene.prototype.setup = function() {

@@ -5,7 +5,7 @@ class MapObject extends GameObject
 
   update : (e) ->
     @timer?.tick()
-    if @timer.isOver()
+    if @timer?.isOver()
       @
 
   setMoveAnimation : (from, to, frame) ->

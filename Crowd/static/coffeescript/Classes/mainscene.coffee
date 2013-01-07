@@ -14,7 +14,6 @@ class MainScene extends Scene
     @addEventListener 'touchstart', @onMousePressed
     @addChild @cursor
     @tileSetQueue = []
-    @moveTo(@map.player, Direction.Up, 10)
 
   setup : ->
     @

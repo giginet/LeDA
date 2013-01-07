@@ -12,16 +12,23 @@ class TileSet extends Group
     @ru = @map.getTile(x + 1, y)
     @rd = @map.getTile(x + 1, y + 1)
     @root = @lu.getPosition().clone()
+    @end = @lu.getPosition().clone().add(new Vector(Tile.WIDTH * 2, Tile.HEIGHT * 2))
+
     for node in [@lu, @ld, @ru, @rd]
       @map.removeChild node
       @addChild node
       node.x -= @root.x
       node.y -= @root.y
-    @characters = []
+
+    @characters = [] # キャラクタと下のタイルを持った配列
     for character in @map.characters
-      if @lu.x <= character.x < @ru.x and @lu.y <= character.y < @ld.y
-        @characters.push character
+      if @root.x <= character.x < @end.x and @root.y <= character.y < @end.y
+        local = @map.globalToLocal(character.getPosition().x, character.getPosition().y)
+        tile = @map.getTile(local.x, local.y)
+        @characters.push [character, tile]
         @map.removeChild character
+        @addChild character
+        character.setPosition(@globalToNodePosition(character.getPosition()))
     @map.addChild @
     w = Tile.WIDTH
     h = Tile.HEIGHT
@@ -61,9 +68,16 @@ class TileSet extends Group
         tile.direction = (tile.direction + 1) % 4
         @removeChild tile
         @map.addChild tile
-        #v = @nodeToGlobalPosition(tile.getPosition())
-        #tile.x = v.x
-        #tile.y = v.y
+      for array in @characters
+        character = array[0]
+        tile = array[1]
+        @removeChild character
+        @map.addChild character
+        if @direction == RotateDirection.Left
+          character.setDirection(character.direction - 1)
+        else
+          character.setDirection(character.direction + 1)
+        character.setPosition(tile.getPosition())
       @map.removeChild @
   isEnd : ->
     return @count >= 90 / TileSet.speed
