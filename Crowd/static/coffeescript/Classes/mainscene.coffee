@@ -1,8 +1,8 @@
 class MainScene extends Scene
   constructor : ->
     super
-    @stage = new Map(10, 10)
-    @addChild @stage
+    @map = new Map(10, 10)
+    @addChild @map
     @addEventListener 'enterframe', @update
     @cursor = new GameObject(144, 144)
     @cursor.setImage("cursor0.png")
@@ -14,6 +14,7 @@ class MainScene extends Scene
     @addEventListener 'touchstart', @onMousePressed
     @addChild @cursor
     @tileSetQueue = []
+    @moveTo(@map.player, Direction.Up, 10)
 
   setup : ->
     @
@@ -26,16 +27,23 @@ class MainScene extends Scene
 
   updateMousePosition : (e) ->
     cursor = @scene.cursor
-    v = @scene.stage.globalToLocal(e.clientX, e.clientY)
+    v = @scene.map.globalToLocal(e.clientX, e.clientY)
     cursor.x = Tile.WIDTH * v.x  - 144 / 2.0
     cursor.y = Tile.HEIGHT * v.y - 144 / 2.0
     #console.log(e.clientX, e.clientY)
 
   onMousePressed : (e) ->
-    v = @stage.globalToLocal(e.x - Tile.WIDTH, e.y - Tile.HEIGHT)
-    set = @stage.rotate(v.x, v.y, RotateDirection.Left)
+    v = @map.globalToLocal(e.x - Tile.WIDTH, e.y - Tile.HEIGHT)
+    set = @map.rotate(v.x, v.y, RotateDirection.Left)
     if set != null
       @tileSetQueue.push set
 
   rotate : (e) ->
     @
+
+  moveTo : (character, direction, frame) ->
+    if character in @map.characters
+      local = @map.globalToLocal(character.x, character.y)
+      fromTile = @map.getTile(local.x, local.y)
+      toTile = @map.getTileWithDirection(local, direction)
+      character.setMoveAnimation(fromTile.getPosition(), toTile.getPosition(), frame)

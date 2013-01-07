@@ -8,7 +8,7 @@ class LogoScene extends Scene
     @addChild @kawaz
     @addEventListener 'enterframe', @update
     @timer = new Timer(180)
-    @timer.setComplete ->
+    @timer.setOnComplete ->
       MaWorld.game.replaceScene(new MainScene())
       @
     @timer.play()

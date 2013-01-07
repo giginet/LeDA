@@ -5,7 +5,7 @@ Direction =
   Left : 3
 
 
-class Character extends GameObject
+class Character extends MapObject
   constructor : (maxFrame) ->
     super(48, 48)
     @maxFrame = maxFrame
