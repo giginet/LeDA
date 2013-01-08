@@ -29,7 +29,6 @@ class TileSet extends Group
         @map.removeChild character
         @addChild character
         character.setPosition(@globalToNodePosition(character.getPosition()))
-    @map.addChild @
     w = Tile.WIDTH
     h = Tile.HEIGHT
     @originX = w
@@ -38,6 +37,7 @@ class TileSet extends Group
     @y = @root.y
     @count = 0
     @direction = direction
+    @addEventListener 'enterframe', @update
 
   update : (e) ->
     if !@isEnd()

@@ -1,3 +1,13 @@
+GameState =
+  Ready : 0
+  Main : 1
+  Rotation : 2
+  Move : 3
+  Goal : 4
+
+
+
+
 class MainScene extends Scene
   constructor : ->
     super
@@ -13,16 +23,21 @@ class MainScene extends Scene
     stage.addEventListener 'mousemove', @updateMousePosition
     @addEventListener 'touchstart', @onMousePressed
     @addChild @cursor
-    @tileSetQueue = []
+    @rotationSet = undefined
+    @state = GameState.Main
 
   setup : ->
     @
 
   update : (e) ->
-    for set in @tileSetQueue
-      set.update()
-      if set.isEnd()
-        @tileSetQueue.deleteAt(@tileSetQueue.index(set))
+    if @state == GameState.Rotation
+      if @rotationSet.isEnd()
+        @rotationSet = undefined
+        @state = GameState.Move
+        @moveTo(@map.player, @map.player.direction, 10)
+    else if @state == GameState.Move
+      if not @map.player.isMoving()
+        @state = GameState.Main
 
   updateMousePosition : (e) ->
     cursor = @scene.cursor
@@ -33,12 +48,15 @@ class MainScene extends Scene
 
   onMousePressed : (e) ->
     v = @map.globalToLocal(e.x - Tile.WIDTH, e.y - Tile.HEIGHT)
-    set = @map.rotate(v.x, v.y, RotateDirection.Left)
-    if set != null
-      @tileSetQueue.push set
+    @rotate(v, RotateDirection.Left)
 
-  rotate : (e) ->
-    @
+  rotate : (v, direction) ->
+    if @state == GameState.Main
+      set = @map.rotate(v.x, v.y, direction)
+      if set != null
+        @rotationSet = set
+        @map.addChild set
+        @state = GameState.Rotation
 
   moveTo : (character, direction, frame) ->
     if character in @map.characters

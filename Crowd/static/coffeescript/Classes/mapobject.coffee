@@ -18,3 +18,5 @@ class MapObject extends GameObject
         velocity = sub.div(frame)
         obj.x += velocity.x
         obj.y += velocity.y
+  isMoving : ->
+    return @timer? and not @timer?.isOver()
