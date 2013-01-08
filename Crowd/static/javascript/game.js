@@ -960,10 +960,10 @@
         this.count += 1;
       }
       if (this.isEnd()) {
+        local = this.map.globalToLocal(this.root.x, this.root.y);
+        rootx = local.x;
+        rooty = local.y;
         if (this.direction === RotateDirection.Left) {
-          local = this.map.globalToLocal(this.root.x, this.root.y);
-          rootx = local.x;
-          rooty = local.y;
           this.map.setTile(rootx, rooty + 1, this.lu);
           this.map.setTile(rootx, rooty, this.ru);
           this.map.setTile(rootx + 1, rooty, this.rd);
@@ -1130,7 +1130,10 @@
       stage = document.getElementById('enchant-stage');
       stage.scene = this;
       stage.addEventListener('mousemove', this.updateMousePosition);
-      this.addEventListener('touchstart', this.onMousePressed);
+      stage.addEventListener('mousedown', this.onMousePressed);
+      stage.oncontextmenu = function() {
+        return false;
+      };
       this.addChild(this.cursor);
       this.rotationSet = void 0;
       this.state = GameState.Main;
@@ -1174,8 +1177,13 @@
 
     MainScene.prototype.onMousePressed = function(e) {
       var v;
-      v = this.map.globalToLocal(e.x, e.y).sub(new Vector(1, 1));
-      return this.rotate(v, RotateDirection.Left);
+      v = this.scene.map.globalToLocal(e.clientX, e.clientY).sub(new Vector(1, 1));
+      if (e.button === 0) {
+        this.scene.rotate(v, RotateDirection.Left);
+      } else {
+        this.scene.rotate(v, RotateDirection.Right);
+      }
+      return true;
     };
 
     MainScene.prototype.rotate = function(v, direction) {

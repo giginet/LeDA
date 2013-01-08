@@ -18,7 +18,9 @@ class MainScene extends Scene
     stage = document.getElementById('enchant-stage')
     stage.scene = @
     stage.addEventListener 'mousemove', @updateMousePosition
-    @addEventListener 'touchstart', @onMousePressed
+    stage.addEventListener 'mousedown', @onMousePressed
+    stage.oncontextmenu = ->
+      false
     @addChild @cursor
     @rotationSet = undefined
     @state = GameState.Main
@@ -51,8 +53,12 @@ class MainScene extends Scene
     #console.log(e.clientX, e.clientY)
 
   onMousePressed : (e) ->
-    v = @map.globalToLocal(e.x, e.y).sub(new Vector(1, 1))
-    @rotate(v, RotateDirection.Left)
+    v = @scene.map.globalToLocal(e.clientX, e.clientY).sub(new Vector(1, 1))
+    if e.button == 0
+      @scene.rotate(v, RotateDirection.Left)
+    else
+      @scene.rotate(v, RotateDirection.Right)
+    return true
 
   rotate : (v, direction) ->
     if @state == GameState.Main

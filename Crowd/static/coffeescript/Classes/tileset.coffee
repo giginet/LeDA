@@ -48,10 +48,10 @@ class TileSet extends Group
       @rotation += speed
       @count += 1
     if @isEnd()
+      local = @map.globalToLocal(@root.x, @root.y)
+      rootx = local.x
+      rooty = local.y
       if @direction == RotateDirection.Left
-        local = @map.globalToLocal(@root.x, @root.y)
-        rootx = local.x
-        rooty = local.y
         @map.setTile(rootx, rooty + 1, @lu)
         @map.setTile(rootx, rooty, @ru)
         @map.setTile(rootx + 1, rooty, @rd)
