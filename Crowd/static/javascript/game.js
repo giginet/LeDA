@@ -760,12 +760,15 @@
         this.timer = new Timer(frame);
         this.timer.play();
         obj = this;
-        return this.timer.setOnUpdate(function() {
+        this.timer.setOnUpdate(function() {
           var sub, velocity;
           sub = to.clone().sub(from);
           velocity = sub.div(frame);
           obj.x += velocity.x;
           return obj.y += velocity.y;
+        });
+        return this.timer.setOnComplete(function() {
+          return obj.setPosition(to);
         });
       }
     };
@@ -902,6 +905,10 @@
           this.map.removeChild(character);
           this.addChild(character);
           character.setPosition(this.globalToNodePosition(character.getPosition()));
+        } else {
+          console.log(this.root);
+          console.log(this.end);
+          console.log("" + (Math.round(character.x)) + ", " + (Math.round(character.y)));
         }
       }
       w = Tile.WIDTH;
@@ -1122,7 +1129,7 @@
 
     MainScene.prototype.onMousePressed = function(e) {
       var v;
-      v = this.map.globalToLocal(e.x - Tile.WIDTH, e.y - Tile.HEIGHT);
+      v = this.map.globalToLocal(e.x, e.y).sub(new Vector(1, 1));
       return this.rotate(v, RotateDirection.Left);
     };
 

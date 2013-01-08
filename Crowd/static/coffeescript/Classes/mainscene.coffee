@@ -47,7 +47,7 @@ class MainScene extends Scene
     #console.log(e.clientX, e.clientY)
 
   onMousePressed : (e) ->
-    v = @map.globalToLocal(e.x - Tile.WIDTH, e.y - Tile.HEIGHT)
+    v = @map.globalToLocal(e.x, e.y).sub(new Vector(1, 1))
     @rotate(v, RotateDirection.Left)
 
   rotate : (v, direction) ->
