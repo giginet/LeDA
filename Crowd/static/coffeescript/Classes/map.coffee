@@ -9,7 +9,7 @@ class Map extends Group
     for x in [0...width]
       @_map.push([])
       for y in [0...height]
-        tile = new Tile(x, y)
+        tile = new Tile(x, y, TileType.Ground)
         @_map[x].push tile
         @tileLayer.addChild tile
     @width = width
