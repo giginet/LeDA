@@ -889,7 +889,7 @@
       _ref = [this.lu, this.ld, this.ru, this.rd];
       for (_i = 0, _len = _ref.length; _i < _len; _i++) {
         node = _ref[_i];
-        this.map.removeChild(node);
+        node.parentNode.removeChild(node);
         this.addChild(node);
         node.x -= this.root.x;
         node.y -= this.root.y;
@@ -902,7 +902,7 @@
           local = this.map.globalToLocal(object.getPosition().x, object.getPosition().y);
           tile = this.map.getTile(local.x, local.y);
           this.objects.push([object, tile]);
-          this.map.removeChild(object);
+          this.map.objectLayer.removeChild(object);
           this.addChild(object);
           object.setPosition(this.globalToNodePosition(object.getPosition()));
         }
@@ -952,7 +952,7 @@
           tile.originY = Tile.HEIGHT * 0.5;
           tile.direction = (tile.direction + 1) % 4;
           this.removeChild(tile);
-          this.map.addChild(tile);
+          this.map.tileLayer.addChild(tile);
         }
         _ref1 = this.objects;
         for (_j = 0, _len1 = _ref1.length; _j < _len1; _j++) {
@@ -960,7 +960,7 @@
           object = array[0];
           tile = array[1];
           this.removeChild(object);
-          this.map.addChild(object);
+          this.map.objectLayer.addChild(object);
           if (this.direction === RotateDirection.Left) {
             object.setDirection(object.direction - 1);
           } else {
@@ -995,13 +995,16 @@
     function Map(width, height) {
       var tile, x, y, _i, _j;
       Map.__super__.constructor.apply(this, arguments);
+      this.tileLayer = new Group();
+      this.objectLayer = new Group();
+      this.addChild(this.tileLayer);
       this._map = [];
       for (x = _i = 0; 0 <= width ? _i < width : _i > width; x = 0 <= width ? ++_i : --_i) {
         this._map.push([]);
         for (y = _j = 0; 0 <= height ? _j < height : _j > height; y = 0 <= height ? ++_j : --_j) {
           tile = new Tile(x, y);
           this._map[x].push(tile);
-          this.addChild(tile);
+          this.tileLayer.addChild(tile);
         }
       }
       this.width = width;
@@ -1010,7 +1013,8 @@
       this.player.setPosition(this.localToGlobal(1, 1));
       this.characters = [this.player];
       this.objects = [this.player];
-      this.addChild(this.player);
+      this.addChild(this.objectLayer);
+      this.objectLayer.addChild(this.player);
     }
 
     Map.prototype.getTile = function(x, y) {

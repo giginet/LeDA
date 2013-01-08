@@ -15,7 +15,7 @@ class TileSet extends Group
     @end = @lu.getPosition().clone().add(new Vector(Tile.WIDTH * 2, Tile.HEIGHT * 2))
 
     for node in [@lu, @ld, @ru, @rd]
-      @map.removeChild node
+      node.parentNode.removeChild node
       @addChild node
       node.x -= @root.x
       node.y -= @root.y
@@ -26,7 +26,7 @@ class TileSet extends Group
         local = @map.globalToLocal(object.getPosition().x, object.getPosition().y)
         tile = @map.getTile(local.x, local.y)
         @objects.push [object, tile]
-        @map.removeChild object
+        @map.objectLayer.removeChild object
         @addChild object
         object.setPosition(@globalToNodePosition(object.getPosition()))
     w = Tile.WIDTH
@@ -67,12 +67,12 @@ class TileSet extends Group
         tile.originY = Tile.HEIGHT * 0.5
         tile.direction = (tile.direction + 1) % 4
         @removeChild tile
-        @map.addChild tile
+        @map.tileLayer.addChild tile
       for array in @objects
         object = array[0]
         tile = array[1]
         @removeChild object
-        @map.addChild object
+        @map.objectLayer.addChild object
         if @direction == RotateDirection.Left
           object.setDirection(object.direction - 1)
         else

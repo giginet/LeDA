@@ -1,20 +1,25 @@
 class Map extends Group
   constructor : (width, height) ->
     super
+
+    @tileLayer = new Group()
+    @objectLayer = new Group()
+    @addChild @tileLayer
     @_map = []
     for x in [0...width]
       @_map.push([])
       for y in [0...height]
         tile = new Tile(x, y)
         @_map[x].push tile
-        @addChild tile
+        @tileLayer.addChild tile
     @width = width
     @height = height
     @player = new Player()
     @player.setPosition(@localToGlobal(1, 1))
     @characters = [@player]
     @objects = [@player]
-    @addChild @player
+    @addChild @objectLayer
+    @objectLayer.addChild @player
 
   getTile : (x, y) ->
     @_map[x][y]
