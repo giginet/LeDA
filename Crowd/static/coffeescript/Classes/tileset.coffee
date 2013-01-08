@@ -20,15 +20,15 @@ class TileSet extends Group
       node.x -= @root.x
       node.y -= @root.y
 
-    @characters = [] # キャラクタと下のタイルを持った配列
-    for character in @map.characters
-      if @root.x <= character.x < @end.x and @root.y <= character.y < @end.y
-        local = @map.globalToLocal(character.getPosition().x, character.getPosition().y)
+    @objects = [] # オブジェクトと下のタイルを持った配列
+    for object in @map.objects
+      if @root.x <= object.x < @end.x and @root.y <= object.y < @end.y
+        local = @map.globalToLocal(object.getPosition().x, object.getPosition().y)
         tile = @map.getTile(local.x, local.y)
-        @characters.push [character, tile]
-        @map.removeChild character
-        @addChild character
-        character.setPosition(@globalToNodePosition(character.getPosition()))
+        @objects.push [object, tile]
+        @map.removeChild object
+        @addChild object
+        object.setPosition(@globalToNodePosition(object.getPosition()))
     w = Tile.WIDTH
     h = Tile.HEIGHT
     @originX = w
@@ -68,16 +68,16 @@ class TileSet extends Group
         tile.direction = (tile.direction + 1) % 4
         @removeChild tile
         @map.addChild tile
-      for array in @characters
-        character = array[0]
+      for array in @objects
+        object = array[0]
         tile = array[1]
-        @removeChild character
-        @map.addChild character
+        @removeChild object
+        @map.addChild object
         if @direction == RotateDirection.Left
-          character.setDirection(character.direction - 1)
+          object.setDirection(object.direction - 1)
         else
-          character.setDirection(character.direction + 1)
-        character.setPosition(tile.getPosition())
+          object.setDirection(object.direction + 1)
+        object.setPosition(tile.getPosition())
       @map.removeChild @
   isEnd : ->
     return @count >= 90 / TileSet.speed

@@ -13,6 +13,7 @@ class Map extends Group
     @player = new Player()
     @player.setPosition(@localToGlobal(1, 1))
     @characters = [@player]
+    @objects = [@player]
     @addChild @player
 
   getTile : (x, y) ->

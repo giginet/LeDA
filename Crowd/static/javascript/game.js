@@ -877,7 +877,7 @@
     TileSet.speed = 10;
 
     function TileSet(map, x, y, direction) {
-      var character, h, local, node, tile, w, _i, _j, _len, _len1, _ref, _ref1, _ref2, _ref3;
+      var h, local, node, object, tile, w, _i, _j, _len, _len1, _ref, _ref1, _ref2, _ref3;
       TileSet.__super__.constructor.call(this);
       this.map = map;
       this.lu = this.map.getTile(x, y);
@@ -894,17 +894,17 @@
         node.x -= this.root.x;
         node.y -= this.root.y;
       }
-      this.characters = [];
-      _ref1 = this.map.characters;
+      this.objects = [];
+      _ref1 = this.map.objects;
       for (_j = 0, _len1 = _ref1.length; _j < _len1; _j++) {
-        character = _ref1[_j];
-        if ((this.root.x <= (_ref2 = character.x) && _ref2 < this.end.x) && (this.root.y <= (_ref3 = character.y) && _ref3 < this.end.y)) {
-          local = this.map.globalToLocal(character.getPosition().x, character.getPosition().y);
+        object = _ref1[_j];
+        if ((this.root.x <= (_ref2 = object.x) && _ref2 < this.end.x) && (this.root.y <= (_ref3 = object.y) && _ref3 < this.end.y)) {
+          local = this.map.globalToLocal(object.getPosition().x, object.getPosition().y);
           tile = this.map.getTile(local.x, local.y);
-          this.characters.push([character, tile]);
-          this.map.removeChild(character);
-          this.addChild(character);
-          character.setPosition(this.globalToNodePosition(character.getPosition()));
+          this.objects.push([object, tile]);
+          this.map.removeChild(object);
+          this.addChild(object);
+          object.setPosition(this.globalToNodePosition(object.getPosition()));
         }
       }
       w = Tile.WIDTH;
@@ -919,7 +919,7 @@
     }
 
     TileSet.prototype.update = function(e) {
-      var array, character, local, rootx, rooty, speed, tile, _i, _j, _len, _len1, _ref, _ref1;
+      var array, local, object, rootx, rooty, speed, tile, _i, _j, _len, _len1, _ref, _ref1;
       if (!this.isEnd()) {
         if (this.direction === RotateDirection.Left) {
           speed = -TileSet.speed;
@@ -954,19 +954,19 @@
           this.removeChild(tile);
           this.map.addChild(tile);
         }
-        _ref1 = this.characters;
+        _ref1 = this.objects;
         for (_j = 0, _len1 = _ref1.length; _j < _len1; _j++) {
           array = _ref1[_j];
-          character = array[0];
+          object = array[0];
           tile = array[1];
-          this.removeChild(character);
-          this.map.addChild(character);
+          this.removeChild(object);
+          this.map.addChild(object);
           if (this.direction === RotateDirection.Left) {
-            character.setDirection(character.direction - 1);
+            object.setDirection(object.direction - 1);
           } else {
-            character.setDirection(character.direction + 1);
+            object.setDirection(object.direction + 1);
           }
-          character.setPosition(tile.getPosition());
+          object.setPosition(tile.getPosition());
         }
         return this.map.removeChild(this);
       }
@@ -1009,6 +1009,7 @@
       this.player = new Player();
       this.player.setPosition(this.localToGlobal(1, 1));
       this.characters = [this.player];
+      this.objects = [this.player];
       this.addChild(this.player);
     }
 
@@ -1148,8 +1149,6 @@
         from = this.map.localToGlobal(local.x, local.y);
         localTo = this.map.getPointWithDirection(local, direction);
         to = this.map.localToGlobal(localTo.x, localTo.y);
-        console.log(from);
-        console.log(to);
         return character.setMoveAnimation(from, to, frame);
       }
     };
