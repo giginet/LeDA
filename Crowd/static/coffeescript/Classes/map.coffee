@@ -1,7 +1,6 @@
 class Map extends Group
   constructor : (width, height) ->
     super
-
     @tileLayer = new Group()
     @objectLayer = new Group()
     @addChild @tileLayer
@@ -9,7 +8,10 @@ class Map extends Group
     for x in [0...width]
       @_map.push([])
       for y in [0...height]
-        tile = new Tile(x, y, TileType.Ground)
+        if x is 5 and y is 5
+          tile = new Tile(x, y, TileType.Goal)
+        else
+          tile = new Tile(x, y, TileType.Ground)
         @_map[x].push tile
         @tileLayer.addChild tile
     @width = width

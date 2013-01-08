@@ -27,6 +27,7 @@ class Tile extends GameObject
     @localY = localY
     @x = localX * Tile.WIDTH
     @y = localY * Tile.HEIGHT
+    @type = type
 
   update : (e) ->
     @rotaiton = @direction * 90
@@ -39,3 +40,6 @@ class Tile extends GameObject
       stages = ["grass", "lake", "tower", "castle", "cave", "forest"]
       types = ["ground", "goal", "hole", "jump", "needle", "brokenGround"]
       return "#{ROOT}/#{stages[stage]}/#{types[type]}.png"
+
+  getTileType : ->
+    return @type

@@ -868,6 +868,7 @@
       this.localY = localY;
       this.x = localX * Tile.WIDTH;
       this.y = localY * Tile.HEIGHT;
+      this.type = type;
     }
 
     Tile.prototype.update = function(e) {
@@ -884,6 +885,10 @@
         types = ["ground", "goal", "hole", "jump", "needle", "brokenGround"];
         return "" + ROOT + "/" + stages[stage] + "/" + types[type] + ".png";
       }
+    };
+
+    Tile.prototype.getTileType = function() {
+      return this.type;
     };
 
     return Tile;
@@ -1027,7 +1032,11 @@
       for (x = _i = 0; 0 <= width ? _i < width : _i > width; x = 0 <= width ? ++_i : --_i) {
         this._map.push([]);
         for (y = _j = 0; 0 <= height ? _j < height : _j > height; y = 0 <= height ? ++_j : --_j) {
-          tile = new Tile(x, y, TileType.Ground);
+          if (x === 5 && y === 5) {
+            tile = new Tile(x, y, TileType.Goal);
+          } else {
+            tile = new Tile(x, y, TileType.Ground);
+          }
           this._map[x].push(tile);
           this.tileLayer.addChild(tile);
         }
@@ -1140,8 +1149,18 @@
         }
       } else if (this.state === GameState.Move) {
         if (!this.map.player.isMoving()) {
+          this.onMoveCompleted();
           return this.state = GameState.Main;
         }
+      }
+    };
+
+    MainScene.prototype.onMoveCompleted = function() {
+      var local, tile;
+      local = this.map.globalToLocal(this.map.player.getPosition().x, this.map.player.getPosition().y);
+      tile = this.map.getTile(local.x, local.y);
+      if (tile.getTileType() === TileType.Goal) {
+        return alert("goal");
       }
     };
 

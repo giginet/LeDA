@@ -5,9 +5,6 @@ GameState =
   Move : 3
   Goal : 4
 
-
-
-
 class MainScene extends Scene
   constructor : ->
     super
@@ -37,7 +34,14 @@ class MainScene extends Scene
         @moveTo(@map.player, @map.player.direction, 10)
     else if @state == GameState.Move
       if not @map.player.isMoving()
+        @onMoveCompleted()
         @state = GameState.Main
+
+  onMoveCompleted : ->
+    local = @map.globalToLocal(@map.player.getPosition().x, @map.player.getPosition().y)
+    tile = @map.getTile(local.x, local.y)
+    if tile.getTileType() == TileType.Goal
+      alert("goal")
 
   updateMousePosition : (e) ->
     cursor = @scene.cursor
