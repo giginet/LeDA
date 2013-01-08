@@ -61,6 +61,7 @@ class MainScene extends Scene
   moveTo : (character, direction, frame) ->
     if character in @map.characters
       local = @map.globalToLocal(character.x, character.y)
-      fromTile = @map.getTile(local.x, local.y)
-      toTile = @map.getTileWithDirection(local, direction)
-      character.setMoveAnimation(fromTile.getPosition(), toTile.getPosition(), frame)
+      from = @map.localToGlobal(local.x, local.y)
+      localTo = @map.getPointWithDirection(local, direction)
+      to = @map.localToGlobal(localTo.x, localTo.y)
+      character.setMoveAnimation(from, to, frame)

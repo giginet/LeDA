@@ -44,9 +44,9 @@ class Map extends Group
   globalToLocal : (x, y) ->
     new Vector(Math.floor(x / Tile.WIDTH), Math.floor(y / Tile.HEIGHT))
 
-  getTileWithDirection : (v, d) ->
+  getPointWithDirection : (v, d) ->
     switch (d)
-      when Direction.Up then return @getTile(v.x, v.y - 1)
-      when Direction.Left then return @getTile(v.x - 1, v.y)
-      when Direction.Down then return @getTile(v.x, v.y + 1)
-      when Direction.Right then return @getTile(v.x + 1, v.y)
+      when Direction.Up then return new Vector(v.x, v.y - 1)
+      when Direction.Left then return new Vector(v.x - 1, v.y)
+      when Direction.Down then return new Vector(v.x, v.y + 1)
+      when Direction.Right then return new Vector(v.x + 1, v.y)

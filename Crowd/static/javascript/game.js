@@ -905,10 +905,6 @@
           this.map.removeChild(character);
           this.addChild(character);
           character.setPosition(this.globalToNodePosition(character.getPosition()));
-        } else {
-          console.log(this.root);
-          console.log(this.end);
-          console.log("" + (Math.round(character.x)) + ", " + (Math.round(character.y)));
         }
       }
       w = Tile.WIDTH;
@@ -1053,16 +1049,16 @@
       return new Vector(Math.floor(x / Tile.WIDTH), Math.floor(y / Tile.HEIGHT));
     };
 
-    Map.prototype.getTileWithDirection = function(v, d) {
+    Map.prototype.getPointWithDirection = function(v, d) {
       switch (d) {
         case Direction.Up:
-          return this.getTile(v.x, v.y - 1);
+          return new Vector(v.x, v.y - 1);
         case Direction.Left:
-          return this.getTile(v.x - 1, v.y);
+          return new Vector(v.x - 1, v.y);
         case Direction.Down:
-          return this.getTile(v.x, v.y + 1);
+          return new Vector(v.x, v.y + 1);
         case Direction.Right:
-          return this.getTile(v.x + 1, v.y);
+          return new Vector(v.x + 1, v.y);
       }
     };
 
@@ -1146,12 +1142,15 @@
     };
 
     MainScene.prototype.moveTo = function(character, direction, frame) {
-      var fromTile, local, toTile;
+      var from, local, localTo, to;
       if (__indexOf.call(this.map.characters, character) >= 0) {
         local = this.map.globalToLocal(character.x, character.y);
-        fromTile = this.map.getTile(local.x, local.y);
-        toTile = this.map.getTileWithDirection(local, direction);
-        return character.setMoveAnimation(fromTile.getPosition(), toTile.getPosition(), frame);
+        from = this.map.localToGlobal(local.x, local.y);
+        localTo = this.map.getPointWithDirection(local, direction);
+        to = this.map.localToGlobal(localTo.x, localTo.y);
+        console.log(from);
+        console.log(to);
+        return character.setMoveAnimation(from, to, frame);
       }
     };
 
