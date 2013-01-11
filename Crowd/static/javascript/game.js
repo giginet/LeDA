@@ -653,7 +653,7 @@
       FPS: 30,
       FONT: 'Helvetica',
       IMAGE_PATH: '/image/',
-      IMAGES: ['kawaz.png', 'characters/player.png', 'chips/grass/ground.png', 'chips/grass/goal.png', 'chips/grass/hole.png', 'chips/grass/rock.png', 'cursor0.png'],
+      IMAGES: ['kawaz.png', 'characters/player.png', 'chips/grass/ground.png', 'chips/grass/goal.png', 'chips/grass/hole.png', 'chips/grass/rock.png', 'chips/ice.png', 'cursor0.png'],
       SOUND_PATH: '/sound/',
       SOUNDS: [],
       INITIAL_LEVEL: 1,
@@ -1041,6 +1041,8 @@
             tile = new Tile(x, y, TileType.Goal);
           } else if (x === 6 && y === 6) {
             tile = new Tile(x, y, TileType.Hole);
+          } else if (x === 7 && y === 7) {
+            tile = new Tile(x, y, TileType.Ice);
           } else {
             tile = new Tile(x, y, TileType.Ground);
           }
@@ -1160,8 +1162,7 @@
         }
       } else if (this.state === GameState.Move) {
         if (!this.map.player.isMoving()) {
-          this.onMoveCompleted();
-          return this.state = GameState.Main;
+          return this.onMoveCompleted();
         }
       }
     };
@@ -1175,6 +1176,10 @@
       } else if (tile.isDangerous()) {
         this.state = GameState.GameOver;
         return alert("gameover");
+      } else if (tile.type === TileType.Ice) {
+        return this.moveTo(this.map.player, this.map.player.direction, 10);
+      } else {
+        return this.state = GameState.Main;
       }
     };
 

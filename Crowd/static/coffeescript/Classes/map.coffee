@@ -12,6 +12,8 @@ class Map extends Group
           tile = new Tile(x, y, TileType.Goal)
         else if x is 6 and y is 6
           tile = new Tile(x, y, TileType.Hole)
+        else if x is 7 and y is 7
+          tile = new Tile(x, y, TileType.Ice)
         else
           tile = new Tile(x, y, TileType.Ground)
         @_map[x].push tile

@@ -38,16 +38,24 @@ class MainScene extends Scene
     else if @state == GameState.Move
       if not @map.player.isMoving()
         @onMoveCompleted()
-        @state = GameState.Main
 
   onMoveCompleted : ->
     local = @map.globalToLocal(@map.player.getPosition().x, @map.player.getPosition().y)
     tile = @map.getTile(local.x, local.y)
     if tile.getTileType() == TileType.Goal
+      # ゴール
+      @state = GameState.Goal
       alert("goal")
     else if tile.isDangerous()
+      # 危険な床
       @state = GameState.GameOver
       alert("gameover")
+    else if tile.type == TileType.Ice
+      # 滑る床のとき、もう一度進めてやる
+      @moveTo(@map.player, @map.player.direction, 10)
+    else
+      @state = GameState.Main
+
 
   updateMousePosition : (e) ->
     cursor = @scene.cursor
