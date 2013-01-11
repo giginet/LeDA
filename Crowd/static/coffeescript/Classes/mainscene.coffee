@@ -34,7 +34,8 @@ class MainScene extends Scene
       if @rotationSet.isEnd()
         @rotationSet = undefined
         @state = GameState.Move
-        @moveNext(@map.player, @map.player.direction)
+        if not @moveNext(@map.player, @map.player.direction)
+          @state = GameState.Main
     else if @state == GameState.Move
       if not @map.player.isMoving()
         @onMoveCompleted()
@@ -52,7 +53,8 @@ class MainScene extends Scene
       alert("goal")
     else if tile.type == TileType.Ice
       # 滑る床のとき、もう一度進めてやる
-      @moveNext(@map.player, @map.player.direction)
+      if not @moveNext(@map.player, @map.player.direction)
+        @state = GameState.Main
     else
       @state = GameState.Main
 
@@ -61,6 +63,8 @@ class MainScene extends Scene
     nextTile = @map.getTile(nextPoint.x, nextPoint.y)
     if not nextTile? or (nextTile? and nextTile.isWalkable(direction))
       @moveTo(character, direction, 10)
+      return true
+    false
 
   updateMousePosition : (e) ->
     cursor = @scene.cursor
