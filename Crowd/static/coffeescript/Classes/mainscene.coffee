@@ -4,6 +4,7 @@ GameState =
   Rotation : 2
   Move : 3
   Goal : 4
+  GameOver : 5
 
 class MainScene extends Scene
   constructor : ->
@@ -44,6 +45,9 @@ class MainScene extends Scene
     tile = @map.getTile(local.x, local.y)
     if tile.getTileType() == TileType.Goal
       alert("goal")
+    else if tile.isDangerous()
+      @state = GameState.GameOver
+      alert("gameover")
 
   updateMousePosition : (e) ->
     cursor = @scene.cursor

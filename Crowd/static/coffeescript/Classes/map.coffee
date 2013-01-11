@@ -10,6 +10,8 @@ class Map extends Group
       for y in [0...height]
         if x is 5 and y is 5
           tile = new Tile(x, y, TileType.Goal)
+        else if x is 6 and y is 6
+          tile = new Tile(x, y, TileType.Hole)
         else
           tile = new Tile(x, y, TileType.Ground)
         @_map[x].push tile

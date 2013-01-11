@@ -891,6 +891,11 @@
       return this.type;
     };
 
+    Tile.prototype.isDangerous = function() {
+      var _ref;
+      return (_ref = this.type) === TileType.Hole || _ref === TileType.Needle;
+    };
+
     return Tile;
 
   })(GameObject);
@@ -1034,6 +1039,8 @@
         for (y = _j = 0; 0 <= height ? _j < height : _j > height; y = 0 <= height ? ++_j : --_j) {
           if (x === 5 && y === 5) {
             tile = new Tile(x, y, TileType.Goal);
+          } else if (x === 6 && y === 6) {
+            tile = new Tile(x, y, TileType.Hole);
           } else {
             tile = new Tile(x, y, TileType.Ground);
           }
@@ -1110,7 +1117,8 @@
     Main: 1,
     Rotation: 2,
     Move: 3,
-    Goal: 4
+    Goal: 4,
+    GameOver: 5
   };
 
   MainScene = (function(_super) {
@@ -1164,6 +1172,9 @@
       tile = this.map.getTile(local.x, local.y);
       if (tile.getTileType() === TileType.Goal) {
         return alert("goal");
+      } else if (tile.isDangerous()) {
+        this.state = GameState.GameOver;
+        return alert("gameover");
       }
     };
 

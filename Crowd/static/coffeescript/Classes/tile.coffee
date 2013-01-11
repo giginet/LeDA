@@ -35,11 +35,14 @@ class Tile extends GameObject
   getFilePath : (stage, type) ->
     ROOT = "chips"
     if type is TileType.Ice
-      return "#{ROOT}/ice.png"
+      "#{ROOT}/ice.png"
     else
       stages = ["grass", "lake", "tower", "castle", "cave", "forest"]
       types = ["ground", "goal", "hole", "jump", "needle", "brokenGround"]
-      return "#{ROOT}/#{stages[stage]}/#{types[type]}.png"
+      "#{ROOT}/#{stages[stage]}/#{types[type]}.png"
 
   getTileType : ->
-    return @type
+    @type
+
+  isDangerous : ->
+    @type in [TileType.Hole, TileType.Needle]
