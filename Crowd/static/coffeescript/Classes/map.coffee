@@ -28,6 +28,8 @@ class Map extends Group
     @objectLayer.addChild @player
 
   getTile : (x, y) ->
+    if x < 0 or y < 0
+      return undefined
     @_map[x][y]
 
   setTile : (x, y, tile) ->

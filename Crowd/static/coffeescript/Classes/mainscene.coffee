@@ -42,7 +42,7 @@ class MainScene extends Scene
   onMoveCompleted : ->
     local = @map.globalToLocal(@map.player.getPosition().x, @map.player.getPosition().y)
     tile = @map.getTile(local.x, local.y)
-    if tile.getTileType() == TileType.Goal
+    if not tile? or tile.getTileType() == TileType.Goal
       # ゴール
       @state = GameState.Goal
       alert("goal")
