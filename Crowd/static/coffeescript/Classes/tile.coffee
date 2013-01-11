@@ -13,7 +13,8 @@ TileType =
   Jump : 3
   Needle : 4
   BrokenGround : 5
-  Ice : 6
+  Rock : 6
+  Ice : 7
 
 class Tile extends GameObject
   @WIDTH = 48
@@ -38,11 +39,14 @@ class Tile extends GameObject
       "#{ROOT}/ice.png"
     else
       stages = ["grass", "lake", "tower", "castle", "cave", "forest"]
-      types = ["ground", "goal", "hole", "jump", "needle", "brokenGround"]
+      types = ["ground", "goal", "hole", "jump", "needle", "brokenGround", "rock"]
       "#{ROOT}/#{stages[stage]}/#{types[type]}.png"
 
   getTileType : ->
     @type
 
-  isDangerous : ->
+  isDangerous : (fromDirection) ->
     @type in [TileType.Hole, TileType.Needle]
+
+  isWalkable : (fromDirection) ->
+    not (@type in [TileType.Rock])

@@ -11,7 +11,7 @@ class Map extends Group
         if x is 5 and y is 5
           tile = new Tile(x, y, TileType.Goal)
         else if x is 6 and y is 6
-          tile = new Tile(x, y, TileType.Hole)
+          tile = new Tile(x, y, TileType.Rock)
         else if x is 7 and y is 7
           tile = new Tile(x, y, TileType.Ice)
         else
@@ -28,7 +28,7 @@ class Map extends Group
     @objectLayer.addChild @player
 
   getTile : (x, y) ->
-    if x < 0 or y < 0
+    if x < 0 or y < 0 or x >= @width or y >= @height
       return undefined
     @_map[x][y]
 

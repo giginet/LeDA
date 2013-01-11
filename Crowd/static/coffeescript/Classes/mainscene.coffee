@@ -34,7 +34,10 @@ class MainScene extends Scene
       if @rotationSet.isEnd()
         @rotationSet = undefined
         @state = GameState.Move
-        @moveTo(@map.player, @map.player.direction, 10)
+        nextPoint = @map.getPointWithDirection(@map.globalToLocal(@map.player.x, @map.player.y), @map.player.direction)
+        nextTile = @map.getTile(nextPoint.x, nextPoint.y)
+        if not nextTile? or (nextTile? and nextTile.isWalkable(@map.player.direction))
+          @moveTo(@map.player, @map.player.direction, 10)
     else if @state == GameState.Move
       if not @map.player.isMoving()
         @onMoveCompleted()
@@ -42,14 +45,14 @@ class MainScene extends Scene
   onMoveCompleted : ->
     local = @map.globalToLocal(@map.player.getPosition().x, @map.player.getPosition().y)
     tile = @map.getTile(local.x, local.y)
-    if not tile? or tile.getTileType() == TileType.Goal
-      # ゴール
-      @state = GameState.Goal
-      alert("goal")
-    else if tile.isDangerous()
+    if not tile? or tile.isDangerous()
       # 危険な床
       @state = GameState.GameOver
       alert("gameover")
+    else if tile.getTileType() == TileType.Goal
+      # ゴール
+      @state = GameState.Goal
+      alert("goal")
     else if tile.type == TileType.Ice
       # 滑る床のとき、もう一度進めてやる
       @moveTo(@map.player, @map.player.direction, 10)
