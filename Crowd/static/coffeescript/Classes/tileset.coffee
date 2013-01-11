@@ -65,9 +65,9 @@ class TileSet extends Group
         tile.rotation = 0
         tile.originX = Tile.WIDTH * 0.5
         tile.originY = Tile.HEIGHT * 0.5
-        tile.direction = (tile.direction + 1) % 4
         @removeChild tile
         @map.tileLayer.addChild tile
+        tile.setDirection((tile.direction + 1) % 4)
       for array in @objects
         object = array[0]
         tile = array[1]

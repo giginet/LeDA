@@ -22,7 +22,7 @@ class Tile extends GameObject
   constructor : (localX, localY, type) ->
     super(Tile.WIDTH, Tile.HEIGHT)
     @setImage @getFilePath(StageType.Grass, type)
-    @direction = 0
+    @direction = Direction.Down
     @addEventListener "enterframe", @update
     @localX = localX
     @localY = localY
@@ -50,3 +50,9 @@ class Tile extends GameObject
 
   isWalkable : (fromDirection) ->
     not (@type in [TileType.Rock])
+
+  setDirection : (direction) ->
+    @originX = Tile.WIDTH * 0.5
+    @originY = Tile.HEIGHT * 0.5
+    @direction = direction
+    @rotation = 90 * ((direction + 2) % 4)

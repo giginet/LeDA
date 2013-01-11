@@ -20,5 +20,6 @@ class MapObject extends GameObject
         obj.y += velocity.y
       @timer.setOnComplete ->
         obj.setPosition(to)
+
   isMoving : ->
     return @timer? and not @timer?.isOver()
