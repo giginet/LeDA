@@ -4,6 +4,7 @@
 # created by giginet on 2013/01/12
 #
 from mwcrypt.crypt import mwcrypt, MAP_LENGTH
+from django.utils import simplejson
 
 import sys
 import array
@@ -31,7 +32,7 @@ class Map(object):
         pass
 
     def get_player_position(self):
-        return list(str(ord(self.buf[0x000A])))
+        return list(ord(self.buf[0x000A]))
 
     def get_player_direction(self):
         return ord(self.buf[0x000B])
@@ -45,8 +46,34 @@ class Map(object):
     def get_matrix(self):
         return [[ord(self.buf[x + y * 16]) for y in xrange(10)] for x in xrange(10)]
 
+    def dump_to_dictionary(self):
+        u"""
+        stage = {
+            name = "TESTCP",
+            player = (0, 0, 0),
+            map = {
+                {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
+            }
+        }
+        """
+        stage = {}
+        stage["name"] = self.get_name()
+        stage["player"] = list(self.get_player_position())
+        stage["player"].append(self.get_player_direction())
+        stage["map"] = self.get_matrix()
+        return stage
+
     def dump_to_json(self):
-        pass
+        return simplejson.dumps(self.dump_to_dictionary())
 
 if __name__ == '__main__':
     if len(sys.argv) < 3:
@@ -61,7 +88,4 @@ if __name__ == '__main__':
         print m.get_version()
         print m.get_checksum()
         matrix = m.get_matrix()
-        for y in xrange(10):
-            for x in xrange(10):
-                print "%3d " % matrix[x][y],
-            print
+        print m.dump_to_json()
