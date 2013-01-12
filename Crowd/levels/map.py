@@ -8,6 +8,7 @@ from django.utils import simplejson
 
 import sys
 import array
+import binascii
 import struct
 
 class Map(object):
@@ -32,7 +33,7 @@ class Map(object):
         pass
 
     def get_player_position(self):
-        return list(ord(self.buf[0x000A]))
+        return [n for n in list(str(binascii.b2a_hex(self.buf[0x000A])))]
 
     def get_player_direction(self):
         return ord(self.buf[0x000B])

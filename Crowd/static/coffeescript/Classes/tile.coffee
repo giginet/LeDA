@@ -7,14 +7,15 @@ StageType =
   Forest : 5
 
 TileType =
-  Ground : 0
-  Goal : 1
-  Hole : 2
-  Jump : 3
-  Needle : 4
-  BrokenGround : 5
-  Rock : 6
-  Ice : 7
+  None : 0
+  Ground : 1
+  Goal : 2
+  Hole : 3
+  Jump : 4
+  Needle : 5
+  BrokenGround : 6
+  Rock : 7
+  Ice : 8
 
 class Tile extends GameObject
   @WIDTH = 48
@@ -35,21 +36,26 @@ class Tile extends GameObject
 
   getFilePath : (stage, type) ->
     ROOT = "chips"
-    if type is TileType.Ice
+    if type is TileType.None
+      "#{ROOT}/none.png"
+    else if type is TileType.Ice
       "#{ROOT}/ice.png"
     else
       stages = ["grass", "lake", "tower", "castle", "cave", "forest"]
       types = ["ground", "goal", "hole", "jump", "needle", "brokenGround", "rock"]
-      "#{ROOT}/#{stages[stage]}/#{types[type]}.png"
+      "#{ROOT}/#{stages[stage]}/#{types[type - 1]}.png"
 
   getTileType : ->
     @type
 
   isDangerous : (fromDirection) ->
-    @type in [TileType.Hole, TileType.Needle]
+    @type in [TileType.Hole, TileType.Needle, TileType.None]
 
   isWalkable : (fromDirection) ->
     not (@type in [TileType.Rock])
+
+  isRotatable : ->
+    not (@type in [TileType.None])
 
   setDirection : (direction) ->
     @originX = Tile.WIDTH * 0.5

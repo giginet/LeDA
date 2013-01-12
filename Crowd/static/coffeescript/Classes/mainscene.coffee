@@ -7,9 +7,9 @@ GameState =
   GameOver : 5
 
 class MainScene extends Scene
-  constructor : ->
+  constructor : (mapData) ->
     super
-    @map = new Map(10, 10)
+    @map = new Map(10, 10, mapData)
     @addChild @map
     @addEventListener 'enterframe', @update
     @cursor = new GameObject(144, 144)
@@ -75,11 +75,13 @@ class MainScene extends Scene
 
   onMousePressed : (e) ->
     v = @scene.map.globalToLocal(e.clientX, e.clientY).sub(new Vector(1, 1))
-    if e.button == 0
-      @scene.rotate(v, RotateDirection.Left)
-    else
-      @scene.rotate(v, RotateDirection.Right)
-    return true
+    if @scene.map.canRotate(v.x, v.y)
+      if e.button == 0
+        @scene.rotate(v, RotateDirection.Left)
+      else
+        @scene.rotate(v, RotateDirection.Right)
+      return true
+    false
 
   rotate : (v, direction) ->
     if @state == GameState.Main

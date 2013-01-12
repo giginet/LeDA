@@ -4,7 +4,6 @@ Direction =
   Down : 2
   Left : 3
 
-
 class Character extends MapObject
   constructor : (maxFrame) ->
     super(48, 48)

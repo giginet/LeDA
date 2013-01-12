@@ -14,6 +14,7 @@ class MaWorld extends Game
     'chips/grass/hole.png',
     'chips/grass/rock.png',
     'chips/ice.png',
+    'chips/none.png',
     'cursor0.png'
   ],
   SOUND_PATH : '/sound/',

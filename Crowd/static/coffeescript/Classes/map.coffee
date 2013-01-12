@@ -1,27 +1,26 @@
 class Map extends Group
-  constructor : (width, height) ->
+  constructor : (width, height, data) ->
     super
     @tileLayer = new Group()
     @objectLayer = new Group()
     @addChild @tileLayer
+    console.log data
     @_map = []
     for x in [0...width]
       @_map.push([])
       for y in [0...height]
-        if x is 5 and y is 5
-          tile = new Tile(x, y, TileType.Goal)
-        else if x is 6 and y is 6
-          tile = new Tile(x, y, TileType.Rock)
-        else if x is 7 and y is 7
-          tile = new Tile(x, y, TileType.Ice)
-        else
-          tile = new Tile(x, y, TileType.Ground)
+        kind = data["map"][x][y]
+        kinds = [TileType.None, TileType.Ground, TileType.Goal, TileType.Rock, TileType.Jump, TileType.Hole, TileType.Rock]
+        tile = new Tile(x, y, kinds[kind])
         @_map[x].push tile
         @tileLayer.addChild tile
     @width = width
     @height = height
     @player = new Player()
-    @player.setPosition(@localToGlobal(1, 1))
+    @player.setPosition(@localToGlobal(data["player"][0], data["player"][1]))
+    direction = ((Direction.Left + data["player"][2]) + 4) % 4
+    console.log direction
+    @player.setDirection(direction)
     @characters = [@player]
     @objects = [@player]
     @addChild @objectLayer
@@ -64,3 +63,10 @@ class Map extends Group
       when Direction.Left then return new Vector(v.x - 1, v.y)
       when Direction.Down then return new Vector(v.x, v.y + 1)
       when Direction.Right then return new Vector(v.x + 1, v.y)
+
+  canRotate : (x, y) ->
+    lu = @getTile(x, y)
+    ld = @getTile(x, y + 1)
+    ru = @getTile(x + 1, y)
+    rd = @getTile(x + 1, y + 1)
+    return lu.isRotatable() and ld.isRotatable() and ru.isRotatable() and rd.isRotatable()
