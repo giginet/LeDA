@@ -4,7 +4,20 @@ class LogoScene extends Scene
     @kawaz.setImage 'kawaz.png'
     @kawaz.x = 193.5
     @kawaz.y = 220
+    @kawaz.opacity = 0
     @addChild @kawaz
     @addEventListener 'enterframe', @update
-    $.getJSON "/javascript/test2.json", {}, (data) ->
-      MaWorld.game.replaceScene(new MainScene(data))
+    @timer = new Timer(180)
+    @timer.setOnComplete ->
+      MaWorld.game.replaceScene(new MainScene(MAP))
+      @
+    @timer.play()
+  update : ->
+    if MaWorld.game.input.a
+      MaWorld.game.replaceScene(new MainScene(MAP))
+      @
+    @timer.tick()
+    if @timer.now() < 60
+      @kawaz.opacity += 1.0/60
+    else if @timer.now() > 120
+      @kawaz.opacity -= 1.0/60
