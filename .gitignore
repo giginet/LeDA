@@ -1,2 +1,4 @@
 Crowd/static/javascript/game.js
 Crowd/static/javascript/enchant.min.js
+Crowd/static/storage/*
+*.db
