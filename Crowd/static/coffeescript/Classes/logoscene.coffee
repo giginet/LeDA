@@ -1,4 +1,5 @@
 class LogoScene extends Scene
   setup : ->
-    $.getJSON "/levels/1/json", {}, (data) ->
+    url = $("#map_id").attr("mapurl")
+    $.getJSON url, {}, (data) ->
       MaWorld.game.replaceScene(new MainScene(data))

@@ -24,6 +24,14 @@ class Level(models.Model):
         u"""ステージデータをJSONとして取り出します"""
         pass
 
+    @models.permalink
+    def get_absolute_url(self):
+        return ('levels_level_detail', (), { 'pk' : self.pk })
+
+    @models.permalink
+    def get_json_url(self):
+        return ('levels_level_json', (), { 'pk' : self.pk })
+
 
 from django.db.models.signals import pre_save
 from map import Map
