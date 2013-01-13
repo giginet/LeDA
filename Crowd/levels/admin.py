@@ -4,6 +4,6 @@ from models import Level
 __author__ = 'giginet'
 
 class LevelAdmin(admin.ModelAdmin):
-    fields = ['title', 'stage_file',]
+    fields = ['stage_file', 'stage_data',]
 
 admin.site.register(Level, LevelAdmin)

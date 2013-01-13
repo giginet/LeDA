@@ -13,8 +13,8 @@ class Level(models.Model):
         path = u'static/storage/levels/'
         return os.path.join(path, filename)
 
-    title = models.CharField(_('Level Title'), max_length=255)
-    stage_data = models.TextField(_('Level Data'), blank=True, null=True, editable=False)
+    title = models.CharField(_('Level Title'), max_length=255, blank=True, null=False)
+    stage_data = models.TextField(_('Level Data'), blank=True, null=True)
     stage_file = models.FileField(upload_to=_get_upload_path, blank=False, null=False)
     optimized_turn = models.IntegerField(_('Optimized '), null=True, blank=True, editable=False)
     created_at = models.DateTimeField(_('Created At'), auto_now_add=True)
@@ -32,6 +32,9 @@ class Level(models.Model):
     def get_json_url(self):
         return ('levels_level_json', (), { 'pk' : self.pk })
 
+    def __unicode__(self):
+        return self.title
+
 
 from django.db.models.signals import pre_save
 from map import Map
@@ -43,6 +46,7 @@ def load_binary(sender, instance, **kwargs):
         file = instance.stage_file
         print instance._get_upload_path(file.name)
         map = Map(file.read(), True)
+        instance.title = map.get_name()
         instance.stage_data = map.dump_to_json()
         print instance.stage_data
 pre_save.connect(load_binary, sender=Level)
