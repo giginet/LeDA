@@ -1,3 +1,4 @@
+#! -*- coding: utf-8 -*-
 from django.db import models
 from levels.models import Level
 from django.utils.translation import ugettext as _
