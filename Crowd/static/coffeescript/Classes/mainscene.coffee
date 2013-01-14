@@ -7,8 +7,9 @@ GameState =
   GameOver : 5
 
 class MainScene extends Scene
-  constructor : (mapData) ->
+  constructor : (mapData, metric_pk) ->
     super
+    @metric_pk = metric_pk
     @map = new Map(10, 10, mapData)
     @addChild @map
     @addEventListener 'enterframe', @update
@@ -76,11 +77,18 @@ class MainScene extends Scene
   onMousePressed : (e) ->
     v = @scene.map.globalToLocal(e.clientX, e.clientY).sub(new Vector(1, 1))
     if @scene.map.canRotate(v.x, v.y)
+      success = false
       if e.button == 0
-        @scene.rotate(v, RotateDirection.Left)
+        d = "left"
+        success = @scene.rotate(v, RotateDirection.Left)
       else
-        @scene.rotate(v, RotateDirection.Right)
-      return true
+        d = "right"
+        success = @scene.rotate(v, RotateDirection.Right)
+      if success
+        # Operationを送信してやる
+        new Post "/operations/create", {"metric" : @scene.metric_pk, "x" : v.x, "y" : v.y, "direction" : d}, (response) ->
+          console.log response
+        return true
     false
 
   rotate : (v, direction) ->
@@ -90,6 +98,8 @@ class MainScene extends Scene
         @rotationSet = set
         @map.addChild set
         @state = GameState.Rotation
+        return true
+    return false
 
   moveTo : (character, direction, frame) ->
     if character in @map.characters

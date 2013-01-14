@@ -13,3 +13,6 @@ class Metric(models.Model):
     ip_address = models.IPAddressField(_('IP Address'), blank=True, null=False)
     is_cleared = models.BooleanField(_('isCleared'), default=False)
     created_at = models.DateTimeField(_('Created At'), auto_now_add=True)
+
+    def __unicode__(self):
+        return self.stage.title

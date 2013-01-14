@@ -8,9 +8,15 @@
   <title></title>
 </head>
 <body>
-<form action="/metrics/create" method="POST">
+<form action="/operations/create" method="POST">
     {% csrf_token %}
-    <input name="stage" type="text">
+    <input name="metric" type="text">
+
+    <input name="x" type="text">
+
+    <input name="y" type="text">
+
+    <input name="direction" type="text">
     <input type="submit" value="送信">
 </form>
 <div id="map_id" mapurl="{{ map_url }}"></div>

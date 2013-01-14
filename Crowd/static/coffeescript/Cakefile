@@ -8,6 +8,7 @@ FILES = [
   'kwing/lib/timer.coffee',
   'kwing/lib/jukebox.coffee',
   'main.coffee',
+  'Classes/post.coffee',
   'Classes/gameobject.coffee',
   'Classes/mapobject.coffee',
   'Classes/character.coffee',
