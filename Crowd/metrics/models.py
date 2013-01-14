@@ -10,6 +10,6 @@ class Metric(models.Model):
 
     stage = models.ForeignKey(Level)
     pre_metric = models.ForeignKey('Metric', null=True, blank=True)
-    ip_address = models.IPAddressField(_('IP Address'), editable=False, blank=True, null=False)
+    ip_address = models.IPAddressField(_('IP Address'), blank=True, null=False)
     is_cleared = models.BooleanField(_('isCleared'), default=False)
     created_at = models.DateTimeField(_('Created At'), auto_now_add=True)

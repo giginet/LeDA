@@ -8,6 +8,11 @@
   <title></title>
 </head>
 <body>
+<form action="/metrics/create" method="POST">
+    {% csrf_token %}
+    <input name="stage" type="text">
+    <input type="submit" value="送信">
+</form>
 <div id="map_id" mapurl="{{ map_url }}"></div>
 <div id="enchant-stage"></div>
 </body>

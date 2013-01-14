@@ -3,8 +3,9 @@ from django.conf.urls.defaults import patterns, url, include
 from django.core.urlresolvers import reverse
 from django.utils.functional import lazy
 from django.views.generic import ListView
-from views import LevelDetailView, LevelJsonView
 from models import Level
+from views import LevelDetailView, LevelJsonView
+
 __author__ = 'giginet'
 __version__ = '1.0.0'
 __date__ = '2011/10/10'
