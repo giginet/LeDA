@@ -1,5 +1,5 @@
-# Create your views here.
-from django.views.generic.edit import CreateView
+# -*- coding: utf-8 -*-
+from django.views.generic.edit import CreateView, UpdateView
 from models import Metric
 from django.http import QueryDict
 from django.forms.models import model_to_dict
@@ -10,6 +10,7 @@ class MetricCreateView(CreateView, JSONResponseMixin):
     success_url = "/"
 
     def get_form_kwargs(self):
+        u"""ip_addressにIPアドレスを格納します"""
         kwargs = super(MetricCreateView, self).get_form_kwargs()
         qd = kwargs["data"].copy()
         qd.update({"ip_address" : self.request.META['REMOTE_ADDR']})
@@ -17,6 +18,18 @@ class MetricCreateView(CreateView, JSONResponseMixin):
         return kwargs
 
     def form_valid(self, form):
+        u"""成功時、オブジェクトの状態をJSONで返却します"""
+        super(MetricCreateView, self).form_valid(form)
+        d = model_to_dict(self.object)
+        d.update({'pk' : self.object.pk})
+        return self.get_json_response(self.convert_context_to_json(d))
+
+class MetricUpdateView(UpdateView, JSONResponseMixin):
+    model = Metric
+    success_url = "/"
+
+    def form_valid(self, form):
+        u"""成功時、オブジェクトの状態をJSONで返却します"""
         super(MetricCreateView, self).form_valid(form)
         d = model_to_dict(self.object)
         d.update({'pk' : self.object.pk})

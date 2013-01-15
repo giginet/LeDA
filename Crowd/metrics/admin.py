@@ -4,6 +4,10 @@ from models import Metric
 __author__ = 'giginet'
 
 class MetricAdmin(admin.ModelAdmin):
-    list_display = ('stage', 'created_at', 'ip_address')
+
+    def state_name(obj):
+        return dict(Metric.STATE)[obj.state]
+
+    list_display = ('stage', state_name, 'created_at', 'ip_address')
 
 admin.site.register(Metric, MetricAdmin)

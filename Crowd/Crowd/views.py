@@ -28,6 +28,7 @@ class IndexView(TemplateView):
 
     def get_context_data(self, *args, **kwargs):
         context = super(IndexView, self).get_context_data(*args, **kwargs)
-        level = random.choice(Level.objects.all())
-        context['map_url'] = level.get_json_url()
+        if Level.objects.count() > 0:
+            level = random.choice(Level.objects.all())
+            context['map_url'] = level.get_json_url()
         return context

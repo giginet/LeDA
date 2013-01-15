@@ -8,10 +8,16 @@ from django.utils.translation import ugettext as _
 class Metric(models.Model):
     u"""プレイヤーの１プレイを保持するクラスです"""
 
+    STATE = (
+        (0, _('Playing')),
+        (1, _('Clear')),
+        (2, _('GameOver'))
+    )
+
     stage = models.ForeignKey(Level)
     pre_metric = models.ForeignKey('Metric', null=True, blank=True)
     ip_address = models.IPAddressField(_('IP Address'), blank=True, null=False)
-    is_cleared = models.BooleanField(_('isCleared'), default=False)
+    state = models.SmallIntegerField(_('State'), default=0, choices=STATE, editable=False)
     created_at = models.DateTimeField(_('Created At'), auto_now_add=True)
 
     def __unicode__(self):

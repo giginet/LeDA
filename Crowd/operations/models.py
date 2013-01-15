@@ -9,12 +9,12 @@ class Operation(models.Model):
     u"""プレイヤーの入力を保持するクラスです"""
 
     DIRECTIONS = (
-        ('left', _('Left')),
-        ('right', _('Right'))
+        (0, _('Left')),
+        (1, _('Right'))
     )
 
     x = models.PositiveSmallIntegerField(_('x'))
     y = models.PositiveSmallIntegerField(_('y'))
     metric = models.ForeignKey(Metric)
-    direction = models.CharField(_('direction'), choices=DIRECTIONS, max_length=15)
+    direction = models.SmallIntegerField(_('Direction'), choices=DIRECTIONS)
     created_at = models.DateTimeField(_('Created At'), auto_now_add=True)
