@@ -25,4 +25,5 @@ class Metric extends Group
   performOperation : (operation) ->
     if @scene?
       v = new Vector(operation.x, operation.y)
+      @scene.setCursorPosition(v.clone().add(new Vector(1, 1)))
       @scene.rotate(v, operation.direction)

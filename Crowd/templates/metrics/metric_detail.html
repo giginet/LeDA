@@ -13,9 +13,16 @@
 <div id="metric_url" metricurl="{{ metric_url }}"></div>
 <div id="enchant-stage"></div>
 <div id="metric-info">
+    <dt>ステージ</dt>
+    <dd>{{ metric.stage.title }}</dd>
     <dt>行動回数</dt>
-    <dd>{{ object }}</dd>
-
+    <dd>{{ metric.operations.count }}</dd>
+    <dt>総プレイ時間</dt>
+    <dd>{{ metric.get_playtime }}</dd>
+    <dt>最終状態</dt>
+    <dd>{{ metric.get_state_name }}</dd>
+    <dt>プレイ日時</dt>
+    <dd>{{ metric.created_at }}</dd>
 </div>
 </body>
 </html>

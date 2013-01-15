@@ -31,3 +31,6 @@ class Metric(models.Model):
             return datetime.timedelta(0)
         end = self.operations.order_by('-created_at')[0].created_at
         return end - begin
+
+    def get_state_name(self):
+        return dict(self.STATE)[self.state]

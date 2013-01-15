@@ -95,6 +95,10 @@ class MainScene extends Scene
     else
       @state = GameState.Main
 
+  setCursorPosition : (v) ->
+    @cursor.x = Tile.WIDTH * v.x  - 144 / 2.0
+    @cursor.y = Tile.HEIGHT * v.y - 144 / 2.0
+
   moveNext : (character, direction) ->
     nextPoint = @map.getPointWithDirection(@map.globalToLocal(character.x, character.y), direction)
     nextTile = @map.getTile(nextPoint.x, nextPoint.y)
@@ -104,10 +108,8 @@ class MainScene extends Scene
     false
 
   updateMousePosition : (e) ->
-    cursor = @scene.cursor
     v = @scene.map.globalToLocal(e.clientX, e.clientY)
-    cursor.x = Tile.WIDTH * v.x  - 144 / 2.0
-    cursor.y = Tile.HEIGHT * v.y - 144 / 2.0
+    @scene.setCursorPosition(v)
     #console.log(e.clientX, e.clientY)
 
   onMousePressed : (e) ->
@@ -120,7 +122,7 @@ class MainScene extends Scene
       else
         d = RotateDirection.Right
         success = @scene.rotate(v, RotateDirection.Right)
-      if success and @mode == GameMode.Play
+      if success and @scene.mode is GameMode.Play
         # Operationを送信してやる
         new Post "/operations/create", {"metric" : @scene.metricPK, "x" : v.x, "y" : v.y, "direction" : d}, (response) ->
           console.log response
