@@ -26,6 +26,7 @@ class MainScene extends Scene
     @addChild @cursor
     @rotationSet = undefined
     @state = GameState.Main
+    @prevTile = undefined
 
   setup : ->
     @
@@ -35,6 +36,8 @@ class MainScene extends Scene
       if @rotationSet.isEnd()
         @rotationSet = undefined
         @state = GameState.Move
+        p = @map.globalToLocal(@map.player.x, @map.player.y)
+        @prevTile = @map.getTile(p.x, p.y)
         if not @moveNext(@map.player, @map.player.direction)
           @state = GameState.Main
     else if @state == GameState.Move
@@ -44,6 +47,7 @@ class MainScene extends Scene
   onMoveCompleted : ->
     local = @map.globalToLocal(@map.player.getPosition().x, @map.player.getPosition().y)
     tile = @map.getTile(local.x, local.y)
+    @prevTile?.onAfterMove(@map.player.direction)
     if not tile? or tile.isDangerous(@map.player.direction)
       # 危険な床
       @state = GameState.GameOver

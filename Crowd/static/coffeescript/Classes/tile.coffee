@@ -26,13 +26,12 @@ class Tile extends GameObject
   @HEIGHT = 48
   constructor : (localX, localY, type) ->
     super(Tile.WIDTH, Tile.HEIGHT)
-    @setImage @getFilePath(StageType.Cave, type)
+    @setType type
     @addEventListener "enterframe", @update
     @localX = localX
     @localY = localY
     @x = localX * Tile.WIDTH
     @y = localY * Tile.HEIGHT
-    @type = type
     if @type is TileType.NeedleRight
       this.setDirection(Direction.Right)
     else if @type is TileType.NeedleUp
@@ -44,6 +43,10 @@ class Tile extends GameObject
 
   update : (e) ->
     @rotaiton = @direction * 90
+
+  setType : (type) ->
+    @type = type
+    @setImage @getFilePath(StageType.Cave, type)
 
   getFilePath : (stage, type) ->
     ROOT = "chips"
@@ -60,6 +63,12 @@ class Tile extends GameObject
 
   getTileType : ->
     @type
+
+  onAfterMove : (toDirection) ->
+    # 移動後に行う処理です
+    console.log "onAfterMove"
+    if @type is TileType.BrokenGround
+      @setType TileType.Hole
 
   isDangerous : (fromDirection) ->
     if @type in [TileType.NeedleRight, TileType.NeedleDown, TileType.NeedleUp, TileType.NeedleLeft]
