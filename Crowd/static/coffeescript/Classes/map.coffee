@@ -4,7 +4,6 @@ class Map extends Group
     @tileLayer = new Group()
     @objectLayer = new Group()
     @addChild @tileLayer
-    console.log data
     @_map = []
     for x in [0...width]
       @_map.push([])

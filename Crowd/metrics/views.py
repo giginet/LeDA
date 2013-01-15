@@ -37,6 +37,8 @@ class MetricUpdateView(UpdateView, JSONResponseMixin):
             qd = kwargs["data"].copy()
             qd.update({"ip_address" : self.request.META['REMOTE_ADDR']})
             qd.update({"stage" : self.object.stage.pk})
+            if self.object.pre_metric:
+                qd.update({"pre_metric" : self.object.pre_metric.pk})
             kwargs["data"] = qd
         return kwargs
 

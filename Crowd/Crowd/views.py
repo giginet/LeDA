@@ -35,10 +35,11 @@ class IndexView(TemplateView):
                 level = Level.objects.get(pk=get['stage'])
                 if not level:
                     level = random.choice(Level.objects.all())
-                    context['map_url'] = level.get_json_url()
+                    context['stage_url'] = level.get_json_url()
                 else:
-                    context['map_url'] = level.get_json_url()
+                    context['stage_url'] = level.get_json_url()
             else:
                 level = random.choice(Level.objects.all())
-                context['map_url'] = level.get_json_url()
+                context['stage_url'] = level.get_json_url()
+        context['stage_count'] = Level.objects.count()
         return context
