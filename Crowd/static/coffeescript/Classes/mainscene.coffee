@@ -1,6 +1,7 @@
 GameMode =
   Play : 0
   Metric : 1
+  View : 2
 
 GameState =
   Ready : 0
@@ -11,7 +12,7 @@ GameState =
   GameOver : 5
 
 class MainScene extends Scene
-  constructor : (mapData, metricPK, mode=GameMode.Play, metric=undefined) ->
+  constructor : (mapData, mode=GameMode.Play, metricPK, metric=undefined) ->
     super
     @mode = mode
     @metric = metric
@@ -25,19 +26,21 @@ class MainScene extends Scene
     @cursor.setImage("cursor0.png")
     @cursor.x = Tile.WIDTH  - 144 / 2.0
     @cursor.y = Tile.HEIGHT - 144 / 2.0
+    @addChild @cursor
     @metricPK = metricPK
     stage = document.getElementById('enchant-stage')
     stage.scene = @
     if @mode == GameMode.Play
       stage.addEventListener 'mousemove', @updateMousePosition
       stage.addEventListener 'mousedown', @onMousePressed
-    else
+    else if @mode == GameMode.Metric
       # Metricモードのとき
       metric.setScene(@)
       @addChild metric
+    else if @mode == GameMode.View
+      @removeChild @cursor
     stage.oncontextmenu = ->
       false
-    @addChild @cursor
     @rotationSet = undefined
     @state = GameState.Main
     @prevTile = undefined

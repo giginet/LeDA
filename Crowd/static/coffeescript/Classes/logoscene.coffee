@@ -7,14 +7,19 @@ class LogoScene extends Scene
     else
       url = $("#stage_url").attr("stageurl")
       stageNo = url.match(/[0-9]+/)[0]
-    $metric = $("#metric_url")
+    $mode = $("#mode")
+    mode = $mode?.attr("mode")
     $.getJSON url, {}, (data) ->
-      if $metric.size() > 0
-        # #metric_urlがあるとき、再生モードにする
+      if mode == "Metric"
+        # 再生モードにする
+        $metric = $("#metric_url")
         metricURL = $metric.attr("metricurl")
         metric = new Metric()
         metric.load metricURL, (metricData) ->
-          MaWorld.game.replaceScene(new MainScene(data["stage_data"], undefined, GameMode.Metric, metric))
+          MaWorld.game.replaceScene(new MainScene(data["stage_data"], GameMode.Metric, undefined, metric))
+      else if mode == "View"
+        # ステージ閲覧モード
+        MaWorld.game.replaceScene(new MainScene(data["stage_data"], GameMode.View, undefined, undefined))
       else
         # ロードが終わったらメトリックスを生成してあげる
         param = {"stage" : stageNo}
@@ -22,4 +27,4 @@ class LogoScene extends Scene
           param["pre_metric"] = preMetricPK
         new Post "/metrics/create", param, (response) ->
           metric_pk = response['pk']
-          MaWorld.game.replaceScene(new MainScene(data["stage_data"], metric_pk), GameMode.Play)
+          MaWorld.game.replaceScene(new MainScene(data["stage_data"], GameMode.Play, metric_pk))
