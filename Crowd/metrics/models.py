@@ -16,7 +16,7 @@ class Metric(models.Model):
         (2, _('GameOver'))
     )
 
-    stage = models.ForeignKey(Level)
+    stage = models.ForeignKey(Level, related_name='metrics')
     pre_metric = models.ForeignKey('Metric', null=True, blank=True)
     ip_address = models.IPAddressField(_('IP Address'), blank=True, null=False)
     state = models.SmallIntegerField(_('State'), default=0, choices=STATE, blank=True, null=False)

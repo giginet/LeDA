@@ -4,7 +4,17 @@
     <title></title>
 </head>
 <body>
-{{ object.title }}
-{{ object.stage_data }}
+<div class="info">
+    <dt>ファイル名</dt>
+    <dd>{{ object.stage_file.name }}</dd>
+    <dt>総プレイ回数</dt>
+    <dd>{{ object.metrics.count }}</dd>
+    <dt>クリア率</dt>
+    <dd>{{ object.clear_rate }}%</dd>
+    <dt>ゲームオーバー率</dt>
+    <dd>{{ object.gameover_rate }}%</dd>
+    <dt>離脱率</dt>
+    <dd>{{ object.defection_rate }}%</dd>
+</div>
 </body>
 </html>

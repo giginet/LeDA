@@ -33,7 +33,24 @@ class Level(models.Model):
         return ('levels_level_json', (), { 'pk' : self.pk })
 
     def __unicode__(self):
-        return self.title
+        return os.path.basename(self.stage_file.name)
+
+    def _get_state_percent(self, state):
+        count = self.metrics.filter(state=state).count()
+        all = self.metrics.count()
+        return float(count) / float(all) * 100
+
+    @property
+    def clear_rate(self):
+        return self._get_state_percent(1)
+
+    @property
+    def gameover_rate(self):
+        return self._get_state_percent(2)
+
+    @property
+    def defection_rate(self):
+        return self._get_state_percent(0)
 
 
 from django.db.models.signals import pre_save
