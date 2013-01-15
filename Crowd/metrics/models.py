@@ -34,3 +34,7 @@ class Metric(models.Model):
 
     def get_state_name(self):
         return dict(self.STATE)[self.state]
+
+    @models.permalink
+    def get_absolute_url(self):
+        return ('metrics_metric_detail', (), { 'pk' : self.pk })

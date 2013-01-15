@@ -1,6 +1,7 @@
 #! -*- coding: utf-8 -*-
 import os
 from django.db import models
+from django.db.models import Count
 from django.utils.translation import ugettext as _
 from django.conf import settings
 
@@ -36,9 +37,9 @@ class Level(models.Model):
         return os.path.basename(self.stage_file.name)
 
     def _get_state_percent(self, state):
-        count = self.metrics.filter(state=state).count()
-        all = self.metrics.count()
-        return float(count) / float(all) * 100
+        q = self.metrics.annotate(Count('operations')).exclude(operations__count=0)
+        count = q.filter(state=state).count()
+        return float(count) / float(q.count()) * 100
 
     @property
     def clear_rate(self):
@@ -52,6 +53,11 @@ class Level(models.Model):
     def defection_rate(self):
         return self._get_state_percent(0)
 
+    @property
+    def skip_rate(self):
+        all = self.metrics.all()
+        q = self.metrics.annotate(Count('operations')).filter(operations__count=0)
+        return float(q.count()) / float(all.count()) * 100
 
 from django.db.models.signals import pre_save
 from map import Map
