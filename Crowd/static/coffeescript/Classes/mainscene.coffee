@@ -7,9 +7,8 @@ GameState =
   GameOver : 5
 
 class MainScene extends Scene
-  constructor : (mapData, metric_pk) ->
+  constructor : (mapData, metricPK) ->
     super
-    @metric_pk = metric_pk
     @map = new Map(10, 10, mapData)
     @addChild @map
     @addEventListener 'enterframe', @update
@@ -17,7 +16,7 @@ class MainScene extends Scene
     @cursor.setImage("cursor0.png")
     @cursor.x = 0
     @cursor.y = 100
-    @metric_pk = metric_pk
+    @metricPK = metricPK
     stage = document.getElementById('enchant-stage')
     stage.scene = @
     stage.addEventListener 'mousemove', @updateMousePosition
@@ -52,16 +51,22 @@ class MainScene extends Scene
     if not tile? or tile.isDangerous(@map.player.direction)
       # 危険な床
       @state = GameState.GameOver
-      alert("gameover")
       # ゲームオーバーになったことを通知
-      new Post "metrics/#{@metric_pk}/update", {'state' : 2}, (response) ->
+      scene = @
+      new Post "metrics/#{@metricPK}/update", {'state' : 2}, (response) ->
         console.log response
+        if confirm("ゲームオーバー もう一度プレイしますか？")
+          logo = new LogoScene()
+          logo.setup(scene.metricPK)
+          MaWorld.game.replaceScene(logo)
+        else
+          location.href = "/"
     else if tile.getTileType() == TileType.Goal
       # ゴール
       @state = GameState.Goal
       alert("goal")
       # クリアしたことを通知
-      new Post "metrics/#{@metric_pk}/update", {'state' : 1}, (response) ->
+      new Post "metrics/#{@metricPK}/update", {'state' : 1}, (response) ->
         console.log response
     else if tile.type == TileType.Ice
       # 滑る床のとき、もう一度進めてやる
@@ -97,7 +102,7 @@ class MainScene extends Scene
         success = @scene.rotate(v, RotateDirection.Right)
       if success
         # Operationを送信してやる
-        new Post "/operations/create", {"metric" : @scene.metric_pk, "x" : v.x, "y" : v.y, "direction" : d}, (response) ->
+        new Post "/operations/create", {"metric" : @scene.metricPK, "x" : v.x, "y" : v.y, "direction" : d}, (response) ->
           console.log response
         return true
     false

@@ -18,7 +18,6 @@ class Map extends Group
     @player = new Player()
     @player.setPosition(@localToGlobal(data["player"][0], data["player"][1]))
     direction = ((Direction.Left + data["player"][2]) + 4) % 4
-    console.log direction
     @player.setDirection(direction)
     @characters = [@player]
     @objects = [@player]
