@@ -29,7 +29,6 @@ class IndexView(TemplateView):
     def get_context_data(self, *args, **kwargs):
         context = super(IndexView, self).get_context_data(*args, **kwargs)
         get = self.request.GET
-        print get
         if Level.objects.count() > 0:
             if get.has_key("stage"):
                 level = Level.objects.get(pk=get['stage'])

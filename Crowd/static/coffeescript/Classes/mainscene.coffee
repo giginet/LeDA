@@ -69,7 +69,7 @@ class MainScene extends Scene
       new Post "metrics/#{@metricPK}/update", {'state' : 1}, (response) ->
         console.log response
         if confirm("ステージクリア！他のステージを遊びますか？")
-          $.get "levels/json", {"ignore" : scene.metricPK}, (response) ->
+          $.get "levels/json?ignore=#{scene.metricPK}", {}, (response) ->
             console.log response
             next = response
             logo = new LogoScene()
