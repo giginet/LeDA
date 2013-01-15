@@ -71,11 +71,14 @@ class MainScene extends Scene
         new Post "/metrics/#{@metricPK}/update", {'state' : 2}, (response) ->
           console.log response
           if confirm("ゲームオーバー もう一度プレイしますか？")
+            # はいの場合、同じステージを読み直す
             logo = new LogoScene()
             logo.setup(scene.metricPK)
             MaWorld.game.replaceScene(logo)
           else
-            location.href = "/"
+            # いいえの場合、別のステージを読み直す
+            scene.loadAnotherStage()
+
     else if tile.getTileType() == TileType.Goal
       # ゴール
       @state = GameState.Goal
@@ -85,12 +88,7 @@ class MainScene extends Scene
         new Post "/metrics/#{@metricPK}/update", {'state' : 1}, (response) ->
           console.log response
           if confirm("ステージクリア！他のステージを遊びますか？")
-            $.get "/levels/json?ignore=#{scene.metricPK}", {}, (response) ->
-              console.log response
-              next = response
-              logo = new LogoScene()
-              logo.setup(scene.metricPK, response)
-              MaWorld.game.replaceScene(logo)
+            scene.loadAnotherStage()
     else if tile.type == TileType.Ice
       # 滑る床のとき、もう一度進めてやる
       if not @moveNext(@map.player, @map.player.direction)
@@ -149,3 +147,12 @@ class MainScene extends Scene
       localTo = @map.getPointWithDirection(local, direction)
       to = @map.localToGlobal(localTo.x, localTo.y)
       character.setMoveAnimation(from, to, frame)
+
+  loadAnotherStage : ->
+    scene = @
+    $.get "/levels/json?ignore=#{scene.metricPK}", {}, (response) ->
+      console.log response
+      next = response
+      logo = new LogoScene()
+      logo.setup(scene.metricPK, response)
+      MaWorld.game.replaceScene(logo)
