@@ -1,7 +1,9 @@
 #! -*- coding: utf-8 -*-
+import datetime
 from django.db import models
 from levels.models import Level
 from django.utils.translation import ugettext as _
+from django.db.models import Max
 
 # Create your models here.
 
@@ -22,3 +24,10 @@ class Metric(models.Model):
 
     def __unicode__(self):
         return self.stage.title
+
+    def get_playtime(self):
+        begin = self.created_at
+        if self.operations.count() == 0:
+            return datetime.timedelta(0)
+        end = self.operations.order_by('-created_at')[0]
+        return end.created_at - begin

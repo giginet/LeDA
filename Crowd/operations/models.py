@@ -15,6 +15,6 @@ class Operation(models.Model):
 
     x = models.PositiveSmallIntegerField(_('x'))
     y = models.PositiveSmallIntegerField(_('y'))
-    metric = models.ForeignKey(Metric)
+    metric = models.ForeignKey(Metric, related_name='operations')
     direction = models.SmallIntegerField(_('Direction'), choices=DIRECTIONS)
     created_at = models.DateTimeField(_('Created At'), auto_now_add=True)

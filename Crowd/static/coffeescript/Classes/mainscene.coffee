@@ -83,10 +83,10 @@ class MainScene extends Scene
     if @scene.map.canRotate(v.x, v.y)
       success = false
       if e.button == 0
-        d = "left"
+        d = RotateDirection.Left
         success = @scene.rotate(v, RotateDirection.Left)
       else
-        d = "right"
+        d = RotateDirection.Right
         success = @scene.rotate(v, RotateDirection.Right)
       if success
         # Operationを送信してやる
