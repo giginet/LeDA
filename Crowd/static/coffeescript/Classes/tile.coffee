@@ -66,7 +66,6 @@ class Tile extends GameObject
 
   onAfterMove : (toDirection) ->
     # 移動後に行う処理です
-    console.log "onAfterMove"
     if @type is TileType.BrokenGround
       @setType TileType.Hole
 

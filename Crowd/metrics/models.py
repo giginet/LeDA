@@ -19,7 +19,7 @@ class Metric(models.Model):
     stage = models.ForeignKey(Level)
     pre_metric = models.ForeignKey('Metric', null=True, blank=True)
     ip_address = models.IPAddressField(_('IP Address'), blank=True, null=False)
-    state = models.SmallIntegerField(_('State'), default=0, choices=STATE, editable=False)
+    state = models.SmallIntegerField(_('State'), default=0, choices=STATE, blank=True, null=False)
     created_at = models.DateTimeField(_('Created At'), auto_now_add=True)
 
     def __unicode__(self):
@@ -29,5 +29,5 @@ class Metric(models.Model):
         begin = self.created_at
         if self.operations.count() == 0:
             return datetime.timedelta(0)
-        end = self.operations.order_by('-created_at')[0]
-        return end.created_at - begin
+        end = self.operations.order_by('-created_at')[0].created_at
+        return end - begin

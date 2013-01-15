@@ -17,6 +17,7 @@ class MainScene extends Scene
     @cursor.setImage("cursor0.png")
     @cursor.x = 0
     @cursor.y = 100
+    @metric_pk = metric_pk
     stage = document.getElementById('enchant-stage')
     stage.scene = @
     stage.addEventListener 'mousemove', @updateMousePosition
@@ -52,10 +53,16 @@ class MainScene extends Scene
       # 危険な床
       @state = GameState.GameOver
       alert("gameover")
+      # ゲームオーバーになったことを通知
+      new Post "metrics/#{@metric_pk}/update", {'state' : 2}, (response) ->
+        console.log response
     else if tile.getTileType() == TileType.Goal
       # ゴール
       @state = GameState.Goal
       alert("goal")
+      # クリアしたことを通知
+      new Post "metrics/#{@metric_pk}/update", {'state' : 1}, (response) ->
+        console.log response
     else if tile.type == TileType.Ice
       # 滑る床のとき、もう一度進めてやる
       if not @moveNext(@map.player, @map.player.direction)
