@@ -15,6 +15,9 @@ class MainScene extends Scene
     super
     @mode = mode
     @metric = metric
+    @background = new GameObject(640, 480)
+    @background.setImage "background.png"
+    @addChild @background
     @map = new Map(10, 10, mapData)
     @addChild @map
     @addEventListener 'enterframe', @update
