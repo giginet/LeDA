@@ -2,7 +2,7 @@ class LogoScene extends Scene
   setup : (preMetricPK, stage=undefined) ->
     if stage?
       stageNo = stage['pk']
-      url = "levels/#{stageNo}/json"
+      url = "/levels/#{stageNo}/json"
       $("#stage_url").attr("stageurl", url)
     else
       url = $("#stage_url").attr("stageurl")

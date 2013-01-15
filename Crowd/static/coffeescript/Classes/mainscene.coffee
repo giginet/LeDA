@@ -53,7 +53,7 @@ class MainScene extends Scene
       @state = GameState.GameOver
       # ゲームオーバーになったことを通知
       scene = @
-      new Post "metrics/#{@metricPK}/update", {'state' : 2}, (response) ->
+      new Post "/metrics/#{@metricPK}/update", {'state' : 2}, (response) ->
         console.log response
         if confirm("ゲームオーバー もう一度プレイしますか？")
           logo = new LogoScene()
@@ -66,10 +66,10 @@ class MainScene extends Scene
       @state = GameState.Goal
       # クリアしたことを通知
       scene = @
-      new Post "metrics/#{@metricPK}/update", {'state' : 1}, (response) ->
+      new Post "/metrics/#{@metricPK}/update", {'state' : 1}, (response) ->
         console.log response
         if confirm("ステージクリア！他のステージを遊びますか？")
-          $.get "levels/json?ignore=#{scene.metricPK}", {}, (response) ->
+          $.get "/levels/json?ignore=#{scene.metricPK}", {}, (response) ->
             console.log response
             next = response
             logo = new LogoScene()

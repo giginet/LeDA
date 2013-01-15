@@ -5,7 +5,7 @@ class MaWorld extends Game
   HEIGHT : 480,
   FPS : 30,
   FONT : 'Helvetica',
-  IMAGE_PATH : 'image/',
+  IMAGE_PATH : '/image/',
   IMAGES : [
     'kawaz.png',
     'characters/player.png',

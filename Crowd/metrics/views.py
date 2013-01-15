@@ -61,8 +61,16 @@ class MetricJSONView(JSONResponseMixin, DetailView):
         def create_operation_dict(operation):
             operation_dict = model_to_dict(operation)
             delta = operation.created_at - begin
-            operation_dict.update({'offset' : float(delta.total_seconds())})
+            operation_dict.update({'offset' : float(delta.total_seconds())}) # ゲーム開始からの開始時間を秒で格納します
             return operation_dict
         operations = [create_operation_dict(operation) for operation in self.object.operations.order_by('created_at')]
         metric_dict = {'id' : self.object.pk, 'stage' : self.object.stage.pk, 'operations' : operations}
         return self.get_json_response(self.convert_context_to_json(metric_dict))
+
+class MetricDetailView(DetailView):
+    model = Metric
+
+    def get_context_data(self, **kwargs):
+        context = super(MetricDetailView, self).get_context_data()
+        context["stage_url"] = self.object.stage.get_json_url()
+        return context
