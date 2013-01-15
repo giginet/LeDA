@@ -67,16 +67,19 @@ class TileSet extends Group
         tile.originY = Tile.HEIGHT * 0.5
         @removeChild tile
         @map.tileLayer.addChild tile
-        tile.setDirection((tile.direction + 1) % 4)
+        if @direction == RotateDirection.Left
+          tile.setDirection((tile.direction - 1) % 4)
+        else
+          tile.setDirection((tile.direction + 1) % 4)
       for array in @objects
         object = array[0]
         tile = array[1]
         @removeChild object
         @map.objectLayer.addChild object
         if @direction == RotateDirection.Left
-          object.setDirection(object.direction - 1)
+          object.setDirection((object.direction - 1) % 4)
         else
-          object.setDirection(object.direction + 1)
+          object.setDirection((object.direction + 1) % 4)
         object.setPosition(tile.getPosition())
       @map.removeChild @
   isEnd : ->

@@ -10,8 +10,7 @@ class Map extends Group
       @_map.push([])
       for y in [0...height]
         kind = data["map"][x][y]
-        kinds = [TileType.None, TileType.Ground, TileType.Goal, TileType.Rock, TileType.Jump, TileType.Hole, TileType.Rock]
-        tile = new Tile(x, y, kinds[kind])
+        tile = new Tile(x, y, kind)
         @_map[x].push tile
         @tileLayer.addChild tile
     @width = width

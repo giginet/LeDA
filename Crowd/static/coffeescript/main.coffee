@@ -13,6 +13,12 @@ class MaWorld extends Game
     'chips/grass/goal.png',
     'chips/grass/hole.png',
     'chips/grass/rock.png',
+    'chips/cave/ground.png',
+    'chips/cave/goal.png',
+    'chips/cave/hole.png',
+    'chips/cave/rock.png',
+    'chips/cave/needle.png',
+    'chips/cave/broken.png',
     'chips/ice.png',
     'chips/none.png',
     'cursor0.png'

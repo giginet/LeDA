@@ -44,7 +44,7 @@ class MainScene extends Scene
   onMoveCompleted : ->
     local = @map.globalToLocal(@map.player.getPosition().x, @map.player.getPosition().y)
     tile = @map.getTile(local.x, local.y)
-    if not tile? or tile.isDangerous()
+    if not tile? or tile.isDangerous(@map.player.direction)
       # 危険な床
       @state = GameState.GameOver
       alert("gameover")
