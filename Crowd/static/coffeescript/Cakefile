@@ -13,6 +13,7 @@ FILES = [
   'Classes/mapobject.coffee',
   'Classes/character.coffee',
   'Classes/player.coffee',
+  'Classes/metric.coffee',
   'Classes/tile.coffee',
   'Classes/tileset.coffee',
   'Classes/map.coffee',

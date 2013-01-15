@@ -11,8 +11,10 @@ class LogoScene extends Scene
     $.getJSON url, {}, (data) ->
       if $metric.size() > 0
         # #metric_urlがあるとき、再生モードにする
-        metric_url = $metric.attr("metricurl")
-        MaWorld.game.replaceScene(new MainScene(data["stage_data"], undefined, GameMode.Metric), metric_url)
+        metricURL = $metric.attr("metricurl")
+        metric = new Metric()
+        metric.load metricURL, (metricData) ->
+          MaWorld.game.replaceScene(new MainScene(data["stage_data"], undefined, GameMode.Metric, metric))
       else
         # ロードが終わったらメトリックスを生成してあげる
         param = {"stage" : stageNo}
