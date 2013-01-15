@@ -4,7 +4,6 @@ from views import IndexView
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin
 
-from metrics.views import MetricCreateView, MetricUpdateView
 from operations.views import OperationCreateView
 
 admin.autodiscover()
@@ -17,8 +16,7 @@ urlpatterns = patterns('',
     # Uncomment the admin/doc line below to enable admin documentation:
     # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
     url(r'^levels/',           include('levels.urls')),
-    url(r'^metrics/create$', MetricCreateView.as_view(), name='metrics_metric_create'),
-    url(r'^metrics/(?P<pk>\d+)/update$', MetricUpdateView.as_view(), name='metrics_metric_update'),
+    url(r'^metrics/',           include('metrics.urls')),
     url(r'^operations/create$', OperationCreateView.as_view(), name='operations_operation_create'),
     # Uncomment the next line to enable the admin:
     url(r'^admin/', include(admin.site.urls)),
