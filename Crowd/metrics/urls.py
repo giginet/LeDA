@@ -16,6 +16,6 @@ lazy_reverse = lambda name=None, *args : lazy(reverse, str)(name, args=args)
 urlpatterns = patterns('',
     url(r'^create$', MetricCreateView.as_view(), name='metrics_metric_create'),
     url(r'^(?P<pk>\d+)/update$', MetricUpdateView.as_view(), name='metrics_metric_update'),
-    url(r'^(?P<pk>\d+)/json', MetricJSONView.as_view(), name='metrics_metric_json'),
+    url(r'^(?P<pk>\d+)/json$', MetricJSONView.as_view(), name='metrics_metric_json'),
     url(r'^(?P<pk>\d+)$', MetricDetailView.as_view(), name='metrics_metric_detail'),
 )

@@ -4,6 +4,7 @@ from django.views.generic.edit import CreateView, UpdateView
 from models import Metric
 from django.http import QueryDict
 from django.forms.models import model_to_dict
+from django.core.urlresolvers import reverse
 from Crowd.views import JSONResponseMixin
 
 class MetricCreateView(CreateView, JSONResponseMixin):
@@ -73,4 +74,5 @@ class MetricDetailView(DetailView):
     def get_context_data(self, **kwargs):
         context = super(MetricDetailView, self).get_context_data()
         context["stage_url"] = self.object.stage.get_json_url()
+        context["metric_url"] = reverse("metrics_metric_json", args=[self.object.pk])
         return context

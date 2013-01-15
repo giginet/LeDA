@@ -1,3 +1,7 @@
+GameMode =
+  Play : 0
+  Metric : 1
+
 GameState =
   Ready : 0
   Main : 1
@@ -7,20 +11,23 @@ GameState =
   GameOver : 5
 
 class MainScene extends Scene
-  constructor : (mapData, metricPK) ->
+  constructor : (mapData, metricPK, mode=GameMode.Play, metric_url=undefined) ->
     super
+    @mode = mode
+    @metric_url = metric_url
     @map = new Map(10, 10, mapData)
     @addChild @map
     @addEventListener 'enterframe', @update
     @cursor = new GameObject(144, 144)
     @cursor.setImage("cursor0.png")
-    @cursor.x = 0
-    @cursor.y = 100
+    cursor.x = Tile.WIDTH  - 144 / 2.0
+    cursor.y = Tile.HEIGHT - 144 / 2.0
     @metricPK = metricPK
     stage = document.getElementById('enchant-stage')
     stage.scene = @
-    stage.addEventListener 'mousemove', @updateMousePosition
-    stage.addEventListener 'mousedown', @onMousePressed
+    if @mode == GameMode.Play
+      stage.addEventListener 'mousemove', @updateMousePosition
+      stage.addEventListener 'mousedown', @onMousePressed
     stage.oncontextmenu = ->
       false
     @addChild @cursor
@@ -51,30 +58,32 @@ class MainScene extends Scene
     if not tile? or tile.isDangerous(@map.player.direction)
       # 危険な床
       @state = GameState.GameOver
-      # ゲームオーバーになったことを通知
-      scene = @
-      new Post "/metrics/#{@metricPK}/update", {'state' : 2}, (response) ->
-        console.log response
-        if confirm("ゲームオーバー もう一度プレイしますか？")
-          logo = new LogoScene()
-          logo.setup(scene.metricPK)
-          MaWorld.game.replaceScene(logo)
-        else
-          location.href = "/"
+      if @mode == GameMode.Play
+        # ゲームオーバーになったことを通知
+        scene = @
+        new Post "/metrics/#{@metricPK}/update", {'state' : 2}, (response) ->
+          console.log response
+          if confirm("ゲームオーバー もう一度プレイしますか？")
+            logo = new LogoScene()
+            logo.setup(scene.metricPK)
+            MaWorld.game.replaceScene(logo)
+          else
+            location.href = "/"
     else if tile.getTileType() == TileType.Goal
       # ゴール
       @state = GameState.Goal
-      # クリアしたことを通知
-      scene = @
-      new Post "/metrics/#{@metricPK}/update", {'state' : 1}, (response) ->
-        console.log response
-        if confirm("ステージクリア！他のステージを遊びますか？")
-          $.get "/levels/json?ignore=#{scene.metricPK}", {}, (response) ->
-            console.log response
-            next = response
-            logo = new LogoScene()
-            logo.setup(scene.metricPK, response)
-            MaWorld.game.replaceScene(logo)
+      if @mode == GameMode.Play
+        # クリアしたことを通知
+        scene = @
+        new Post "/metrics/#{@metricPK}/update", {'state' : 1}, (response) ->
+          console.log response
+          if confirm("ステージクリア！他のステージを遊びますか？")
+            $.get "/levels/json?ignore=#{scene.metricPK}", {}, (response) ->
+              console.log response
+              next = response
+              logo = new LogoScene()
+              logo.setup(scene.metricPK, response)
+              MaWorld.game.replaceScene(logo)
     else if tile.type == TileType.Ice
       # 滑る床のとき、もう一度進めてやる
       if not @moveNext(@map.player, @map.player.direction)
@@ -107,7 +116,7 @@ class MainScene extends Scene
       else
         d = RotateDirection.Right
         success = @scene.rotate(v, RotateDirection.Right)
-      if success
+      if success and @mode == GameMode.Play
         # Operationを送信してやる
         new Post "/operations/create", {"metric" : @scene.metricPK, "x" : v.x, "y" : v.y, "direction" : d}, (response) ->
           console.log response
