@@ -1,0 +1,311 @@
+- model: levels.level
+  pk: 1
+  fields:
+    title: Cave0
+    stage_file: static/fixtures/map/cave/00.mwm
+    optimized_turn: 0
+    created_at: 2013-01-15
+    updated_at: 2013-01-15
+- model: levels.level
+  pk: 2
+  fields:
+    title: Cave1
+    stage_file: static/fixtures/map/cave/01.mwm
+    optimized_turn: 0
+    created_at: 2013-01-15
+    updated_at: 2013-01-15
+- model: levels.level
+  pk: 3
+  fields:
+    title: Cave2
+    stage_file: static/fixtures/map/cave/02.mwm
+    optimized_turn: 0
+    created_at: 2013-01-15
+    updated_at: 2013-01-15
+- model: levels.level
+  pk: 4
+  fields:
+    title: Cave3
+    stage_file: static/fixtures/map/cave/03.mwm
+    optimized_turn: 0
+    created_at: 2013-01-15
+    updated_at: 2013-01-15
+- model: levels.level
+  pk: 5
+  fields:
+    title: Cave4
+    stage_file: static/fixtures/map/cave/04.mwm
+    optimized_turn: 0
+    created_at: 2013-01-15
+    updated_at: 2013-01-15
+- model: levels.level
+  pk: 6
+  fields:
+    title: Cave5
+    stage_file: static/fixtures/map/cave/05.mwm
+    optimized_turn: 0
+    created_at: 2013-01-15
+    updated_at: 2013-01-15
+- model: levels.level
+  pk: 7
+  fields:
+    title: Cave6
+    stage_file: static/fixtures/map/cave/06.mwm
+    optimized_turn: 0
+    created_at: 2013-01-15
+    updated_at: 2013-01-15
+- model: levels.level
+  pk: 8
+  fields:
+    title: Cave7
+    stage_file: static/fixtures/map/cave/07.mwm
+    optimized_turn: 0
+    created_at: 2013-01-15
+    updated_at: 2013-01-15
+- model: levels.level
+  pk: 9
+  fields:
+    title: Cave8
+    stage_file: static/fixtures/map/cave/08.mwm
+    optimized_turn: 0
+    created_at: 2013-01-15
+    updated_at: 2013-01-15
+- model: levels.level
+  pk: 10
+  fields:
+    title: Cave9
+    stage_file: static/fixtures/map/cave/09.mwm
+    optimized_turn: 0
+    created_at: 2013-01-15
+    updated_at: 2013-01-15
+- model: levels.level
+  pk: 11
+  fields:
+    title: Ruins0
+    stage_file: static/fixtures/map/forest/00.mwm
+    optimized_turn: 0
+    created_at: 2013-01-15
+    updated_at: 2013-01-15
+- model: levels.level
+  pk: 12
+  fields:
+    title: Forest1
+    stage_file: static/fixtures/map/forest/01.mwm
+    optimized_turn: 0
+    created_at: 2013-01-15
+    updated_at: 2013-01-15
+- model: levels.level
+  pk: 13
+  fields:
+    title: Forest2
+    stage_file: static/fixtures/map/forest/02.mwm
+    optimized_turn: 0
+    created_at: 2013-01-15
+    updated_at: 2013-01-15
+- model: levels.level
+  pk: 14
+  fields:
+    title: Forest3
+    stage_file: static/fixtures/map/forest/03.mwm
+    optimized_turn: 0
+    created_at: 2013-01-15
+    updated_at: 2013-01-15
+- model: levels.level
+  pk: 15
+  fields:
+    title: Forest4
+    stage_file: static/fixtures/map/forest/04.mwm
+    optimized_turn: 0
+    created_at: 2013-01-15
+    updated_at: 2013-01-15
+- model: levels.level
+  pk: 16
+  fields:
+    title: Forest5
+    stage_file: static/fixtures/map/forest/05.mwm
+    optimized_turn: 0
+    created_at: 2013-01-15
+    updated_at: 2013-01-15
+- model: levels.level
+  pk: 17
+  fields:
+    title: Forest6
+    stage_file: static/fixtures/map/forest/06.mwm
+    optimized_turn: 0
+    created_at: 2013-01-15
+    updated_at: 2013-01-15
+- model: levels.level
+  pk: 18
+  fields:
+    title: Forest7
+    stage_file: static/fixtures/map/forest/07.mwm
+    optimized_turn: 0
+    created_at: 2013-01-15
+    updated_at: 2013-01-15
+- model: levels.level
+  pk: 19
+  fields:
+    title: Forest8
+    stage_file: static/fixtures/map/forest/08.mwm
+    optimized_turn: 0
+    created_at: 2013-01-15
+    updated_at: 2013-01-15
+- model: levels.level
+  pk: 20
+  fields:
+    title: Forest9
+    stage_file: static/fixtures/map/forest/09.mwm
+    optimized_turn: 0
+    created_at: 2013-01-15
+    updated_at: 2013-01-15
+- model: levels.level
+  pk: 21
+  fields:
+    title: Ruins0
+    stage_file: static/fixtures/map/ruins/00.mwm
+    optimized_turn: 0
+    created_at: 2013-01-15
+    updated_at: 2013-01-15
+- model: levels.level
+  pk: 22
+  fields:
+    title: Ruins1
+    stage_file: static/fixtures/map/ruins/01.mwm
+    optimized_turn: 0
+    created_at: 2013-01-15
+    updated_at: 2013-01-15
+- model: levels.level
+  pk: 23
+  fields:
+    title: Ruins2
+    stage_file: static/fixtures/map/ruins/02.mwm
+    optimized_turn: 0
+    created_at: 2013-01-15
+    updated_at: 2013-01-15
+- model: levels.level
+  pk: 24
+  fields:
+    title: Ruins3
+    stage_file: static/fixtures/map/ruins/03.mwm
+    optimized_turn: 0
+    created_at: 2013-01-15
+    updated_at: 2013-01-15
+- model: levels.level
+  pk: 25
+  fields:
+    title: Ruins4
+    stage_file: static/fixtures/map/ruins/04.mwm
+    optimized_turn: 0
+    created_at: 2013-01-15
+    updated_at: 2013-01-15
+- model: levels.level
+  pk: 26
+  fields:
+    title: Ruins5
+    stage_file: static/fixtures/map/ruins/05.mwm
+    optimized_turn: 0
+    created_at: 2013-01-15
+    updated_at: 2013-01-15
+- model: levels.level
+  pk: 27
+  fields:
+    title: Ruins6
+    stage_file: static/fixtures/map/ruins/06.mwm
+    optimized_turn: 0
+    created_at: 2013-01-15
+    updated_at: 2013-01-15
+- model: levels.level
+  pk: 28
+  fields:
+    title: Ruins7
+    stage_file: static/fixtures/map/ruins/07.mwm
+    optimized_turn: 0
+    created_at: 2013-01-15
+    updated_at: 2013-01-15
+- model: levels.level
+  pk: 29
+  fields:
+    title: Ruins8
+    stage_file: static/fixtures/map/ruins/08.mwm
+    optimized_turn: 0
+    created_at: 2013-01-15
+    updated_at: 2013-01-15
+- model: levels.level
+  pk: 30
+  fields:
+    title: Ruins9
+    stage_file: static/fixtures/map/ruins/09.mwm
+    optimized_turn: 0
+    created_at: 2013-01-15
+    updated_at: 2013-01-15
+  pk: 31
+  fields:
+    title: Other0
+    stage_file: static/fixtures/map/other/00.mwm
+    optimized_turn: 0
+    created_at: 2013-01-15
+    updated_at: 2013-01-15
+- model: levels.level
+  pk: 32
+  fields:
+    title: Other1
+    stage_file: static/fixtures/map/other/01.mwm
+    optimized_turn: 0
+    created_at: 2013-01-15
+    updated_at: 2013-01-15
+- model: levels.level
+  pk: 33
+  fields:
+    title: Other2
+    stage_file: static/fixtures/map/other/02.mwm
+    optimized_turn: 0
+    created_at: 2013-01-15
+    updated_at: 2013-01-15
+- model: levels.level
+  pk: 34
+  fields:
+    title: Other3
+    stage_file: static/fixtures/map/other/03.mwm
+    optimized_turn: 0
+    created_at: 2013-01-15
+    updated_at: 2013-01-15
+- model: levels.level
+  pk: 35
+  fields:
+    title: Other4
+    stage_file: static/fixtures/map/other/04.mwm
+    optimized_turn: 0
+    created_at: 2013-01-15
+    updated_at: 2013-01-15
+- model: levels.level
+  pk: 36
+  fields:
+    title: Other5
+    stage_file: static/fixtures/map/other/05.mwm
+    optimized_turn: 0
+    created_at: 2013-01-15
+    updated_at: 2013-01-15
+- model: levels.level
+  pk: 37
+  fields:
+    title: Other6
+    stage_file: static/fixtures/map/other/06.mwm
+    optimized_turn: 0
+    created_at: 2013-01-15
+    updated_at: 2013-01-15
+- model: levels.level
+  pk: 38
+  fields:
+    title: Other7
+    stage_file: static/fixtures/map/other/07.mwm
+    optimized_turn: 0
+    created_at: 2013-01-15
+    updated_at: 2013-01-15
+- model: levels.level
+  pk: 39
+  fields:
+    title: Other8
+    stage_file: static/fixtures/map/other/08.mwm
+    optimized_turn: 0
+    created_at: 2013-01-15
+    updated_at: 2013-01-15

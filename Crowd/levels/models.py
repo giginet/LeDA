@@ -18,8 +18,8 @@ class Level(models.Model):
     stage_data = models.TextField(_('Level Data'), blank=True, null=True)
     stage_file = models.FileField(upload_to=_get_upload_path, blank=False, null=False)
     optimized_turn = models.IntegerField(_('Optimized '), null=True, blank=True, editable=False)
-    created_at = models.DateTimeField(_('Created At'), auto_now_add=True)
-    updated_at = models.DateTimeField(_('Updated At'), auto_now=True)
+    created_at = models.DateTimeField(_('Created At'), auto_now_add=True, editable=False)
+    updated_at = models.DateTimeField(_('Updated At'), auto_now=True, editable=False)
 
     def get_json(self):
         u"""ステージデータをJSONとして取り出します"""
@@ -39,6 +39,8 @@ class Level(models.Model):
     def _get_state_percent(self, state):
         q = self.metrics.annotate(Count('operations')).exclude(operations__count=0)
         count = q.filter(state=state).count()
+        if q.count() == 0:
+            return 0
         return float(count) / float(q.count()) * 100
 
     @property
@@ -57,6 +59,8 @@ class Level(models.Model):
     def skip_rate(self):
         all = self.metrics.all()
         q = self.metrics.annotate(Count('operations')).filter(operations__count=0)
+        if all.count() == 0:
+            return 0
         return float(q.count()) / float(all.count()) * 100
 
 from django.db.models.signals import pre_save
