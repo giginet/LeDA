@@ -66,6 +66,10 @@ STATIC_ROOT = '/static/'
 # Example: "http://media.lawrence.com/static/"
 STATIC_URL = '/static/'
 
+FIXTURE_DIRS = {
+        os.path.join(ROOT, 'Crowd/fixtures')
+}
+
 # Additional locations of static files
 STATICFILES_DIRS = (
     # Put strings here, like "/home/html/static" or "C:/www/django/static".
