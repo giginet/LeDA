@@ -110,8 +110,6 @@ class MainScene extends Scene
       @moveTo(character, direction, 10)
       return true
     else if nextTile? and not nextTile.isWalkable(direction)
-      console.log nextTile.type
-      console.log TileType.Rock
       if nextTile.type == TileType.Rock # 岩があったら一度だけ反射する
         newDirection = (direction + 2) % 4
         character.setDirection(newDirection)
@@ -119,6 +117,7 @@ class MainScene extends Scene
         nextTile = @map.getTile(nextPoint.x, nextPoint.y)
         if not nextTile? or (nextTile? and nextTile.isWalkable(newDirection))
           @moveTo(character, newDirection, 10)
+          return true
     false
 
   updateMousePosition : (e) ->
