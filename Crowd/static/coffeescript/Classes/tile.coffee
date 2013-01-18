@@ -10,10 +10,10 @@ TileType =
   None : 0
   Ground : 1
   Goal : 2
-  Wall : 3
+  Rock : 3
   BrokenGround : 4
   Hole : 5
-  Rock : 6
+  Wall : 6
   Ice : 7
   NeedleLeft : 224
   NeedleUp : 225
