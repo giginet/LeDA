@@ -11,8 +11,8 @@ TileType =
   Ground : 1
   Goal : 2
   Rock : 3
-  BrokenGround : 4
-  Hole : 5
+  Hole : 4
+  BrokenGround : 5
   Wall : 6
   Ice : 7
   NeedleLeft : 224
@@ -58,7 +58,7 @@ class Tile extends GameObject
     else if type in [TileType.NeedleRight, TileType.NeedleDown, TileType.NeedleUp, TileType.NeedleLeft]
       "#{ROOT}/#{stages[stage]}/needle.png"
     else
-      types = ["ground", "goal", "rock", "broken", "hole", "rock"]
+      types = ["ground", "goal", "rock", "hole", "broken", "rock"]
       "#{ROOT}/#{stages[stage]}/#{types[type - 1]}.png"
 
   getTileType : ->

@@ -1,0 +1,123 @@
+%        File: report.tex
+%     Created: Sat Jan 19 07:00 AM 2013 J
+% Last Change: Sat Jan 19 07:00 AM 2013 J
+%
+\documentclass[a4paper,12pt,titlepage]{jreport}
+\usepackage[dvips]{graphicx}
+\usepackage{amsmath}
+\usepackage{ascmac,here,txfonts,txfonts}
+\usepackage{listings}
+\usepackage{color}
+\usepackage{fancybox} 
+
+\lstset{
+breaklines = true,
+language=C++,
+basicstyle=\ttfamily\scriptsize,
+commentstyle={\itshape \color[cmyk]{1,0.4,1,0}},
+classoffset=1,
+keywordstyle={\bfseries \color[rgb]{0,0,1}},
+stringstyle={\ttfamily \color[rgb]{0,0,1}},
+frame=tRBl,
+framesep=5pt,
+showstringspaces=false,
+numbers=left,
+stepnumber=1,
+numberstyle=\tiny,
+tabsize=2,
+}
+
+% 年度名
+\def\@yearname{%
+\def\@heisei{\year}%
+\advance\@heisei-1988%
+\ifnum \month<4 \advance\@heisei-1 \fi%
+平成%
+\ifnum \@heisei=1 元%
+\else \number\@heisei%
+\fi%
+年度\ \@thesisname
+}
+
+\renewcommand{\maketitle}{%
+\begin{titlepage}%
+  \let\footnotesize\small%
+  \let\footnoterule\relax%
+  \let\footnote\thanks%
+  \null\vfil%
+  % \vskip 60\p@%
+  \begin{center}%
+    {\Large 平成25年度 卒業論文 \par}%
+    \vskip 1em%
+    {\LARGE クラウドソーシングを用いたゲームのレベルデザイン効率化 \par}%
+    \vskip 1em%
+    {\LARGE \textit{Improvement of game level-design via Crowdsourcing.} \par}%
+    \vskip 12em%
+    \vskip 1em%
+    \lineskip .75em%
+    {\Large 北海道大学 \hskip .5em 工学部 \par}
+    \vskip .0em
+    {\Large 情報エレクトロニクス系 \hskip .5em 情報工学コース \par}
+    \vskip .0em
+    {\Large 複雑系工学講座 \hskip .5em 表現系工学研究室 \par}
+    \vskip 1.0em%
+    {\Large 三木 康暉 \par}%
+    \vskip 1.5em%
+    {\Large 平成25年2月14日 \par}%   
+  \end{center}\par%
+  % \@thanks\vfil\null%
+  \end{titlepage}%
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% layout
+
+\renewcommand{\baselinestretch}{1.15}
+
+\setlength{\paperwidth}{597pt}
+\setlength{\paperheight}{845pt}
+
+\setlength{\hoffset}{10pt}
+\setlength{\voffset}{10pt}
+\setlength{\topmargin}{0pt}
+\setlength{\headheight}{0pt}
+\setlength{\headsep}{0pt}
+\setlength{\topskip}{0pt}
+\setlength{\oddsidemargin}{0pt}
+\setlength{\evensidemargin}{0pt}
+\setlength{\marginparwidth}{72pt}
+\setlength{\marginparsep}{10pt}
+\setlength{\textwidth}{433pt}  % paperwidth - (hoffset + 72pt) - (marginparwidth + marginparsep)
+%\setlength{\textheight}{681pt} % paperheight - ((voffset + 72pt) * 2)
+\setlength{\textheight}{672pt} %
+
+%\setlength{\footskip}{41pt} 
+\setlength{\footskip}{50pt}    % 本文とフッタ領域の間隔
+
+\title{タイトル}
+% \author{三木 康暉}
+% \thesisname{卒業論文}
+% \univname{北海道大学}
+% \facultyname{工学部}
+% \deptname{情報エレクトロニクス学科}
+% \coursename{情報工学コース}
+% \fieldname{複雑系工学講座}
+% \labname{表現系工学研究室}
+ \date{平成25年2月14日}
+% 
+\begin{document}
+\maketitle
+\clearpage
+
+
+\pagenumbering{roman}
+\tableofcontents
+\pagebreak
+\pagenumbering{arabic}
+
+\input{chapter1.tex}
+\input{chapter2.tex}
+\input{chapter3.tex}
+\renewcommand{\bibname}{参考文献}
+\input{bibliograpy.tex}
+\end{document}
