@@ -1,4 +1,4 @@
-This is e-pTeX, Version 3.1415926-p3.3-110825-2.4 (utf8.euc) (TeX Live 2012) (format=platex 2012.11.19)  21 JAN 2013 11:55
+This is e-pTeX, Version 3.1415926-p3.3-110825-2.4 (utf8.euc) (TeX Live 2012) (format=platex 2012.11.19)  24 JAN 2013 13:30
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -410,24 +410,28 @@ LaTeX Font Info:    Font shape `JT1/mc/bx/n' in size <14.4> not available
 (Font)              Font shape `JT1/gt/m/n' tried instead on input line 4.
 LaTeX Font Info:    Font shape `JY1/mc/bx/n' in size <14.4> not available
 (Font)              Font shape `JY1/gt/m/n' tried instead on input line 4.
-) (/Users/giginet/Documents/aptana3/crowd/report/bibliograpy.tex [6
-
-]) [7
+) (/Users/giginet/Documents/aptana3/crowd/report/chapter4.tex [6
 
 ]
-(/Users/giginet/Documents/aptana3/crowd/report/report.aux)
+第 4 章
+[7
+
+] [8] [9]) (/Users/giginet/Documents/aptana3/crowd/report/bibliograpy.tex
+[10]) [11
+
+] (/Users/giginet/Documents/aptana3/crowd/report/report.aux)
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
  ) 
 Here is how much of TeX's memory you used:
- 3762 strings out of 494059
- 50310 string characters out of 3156204
+ 3765 strings out of 494059
+ 50434 string characters out of 3156204
  135042 words of memory out of 3000000
  7122 multiletter control sequences out of 15000+200000
  37044 words of font info for 119 fonts, out of 3000000 for 9000
  745 hyphenation exceptions out of 8191
  33i,8n,58p,462b,236s stack positions out of 5000i,500n,10000p,200000b,50000s
 
-Output written on /Users/giginet/Documents/aptana3/crowd/report/report.dvi (9 p
-ages, 20880 bytes).
+Output written on /Users/giginet/Documents/aptana3/crowd/report/report.dvi (13 
+pages, 32516 bytes).
