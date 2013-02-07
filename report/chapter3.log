@@ -1,9 +1,9 @@
-This is e-pTeX, Version 3.1415926-p3.3-110825-2.4 (utf8.euc) (TeX Live 2012) (format=platex 2012.11.19)  31 JAN 2013 16:58
+This is e-pTeX, Version 3.1415926-p3.3-110825-2.4 (utf8.euc) (TeX Live 2012) (format=platex 2012.11.19)  4 FEB 2013 21:37
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
-**/Users/giginet/Documents/aptana3/crowd/report/chapter4.tex
-(/Users/giginet/Documents/aptana3/crowd/report/chapter4.tex
+**/Users/giginet/Documents/aptana3/crowd/report/chapter3.tex
+(/Users/giginet/Documents/aptana3/crowd/report/chapter3.tex
 pLaTeX2e <2006/11/10> (based on LaTeX2e <2011/06/27> patch level 0)
 Babel <v3.8m> and hyphenation patterns for english, dumylang, nohyphenation, ge
 rman-x-2012-05-30, ngerman-x-2012-05-30, afrikaans, ancientgreek, ibycus, arabi
@@ -18,11 +18,11 @@ lovak, slovenian, spanish, swedish, turkish, turkmen, ukrainian, uppersorbian,
 welsh, loaded.
 ! Undefined control sequence.
 l.1 \chapter
-            {実験方法}
+            {提案手法}
 ? 
 ! Emergency stop.
 l.1 \chapter
-            {実験方法}
+            {提案手法}
 End of file on the terminal!
 
  

@@ -1,15 +1,42 @@
 \chapter{実験方法}
-\section{対象とするゲーム}
-\subsection{基本ルール}
+\section{対象とするゲーム} 
+\subsection{基本ルール} 
 今回、対象としたゲームは、ターン型完全情報のパズルゲームである。
 このゲームは、10x10の盤面を操作し、キャラクターがゴール状態に辿り着くまでに繰り返す。
 プレイヤーは一人でプレイする
 \subsection{ターンの流れ}
 まず、プレイヤーは盤面の中から隣接する2x2の任意の4マスについて選択する。
+
+\begin{figure}[htbp]
+  \begin{center}
+    \includegraphics[bb=0 0 172 150, width=4cm]{images/41.png}
+  \end{center}
+  \caption{初期状態}
+  \label{fig:one}
+\end{figure}
+
 選択したマスについて、プレイヤーは選択したマスを右方向、ないしは左方向に回転させる。
 ただし、何も無い空白のマスを含む4マスは回転させることができない。
-マップを回転させると、上に乗っているオブジェクトやキャラクターも同様のルールによって回転する。
-次に、プレイヤーキャラクターは、現在向いている方向に自動的に移動する。移動はスキップすることができない。
+マップを回転させると、上に乗っているオブジェクトやキャラクターも同様のルールによって回転する。（図4-2）
+
+\begin{figure}[htbp]
+  \begin{center}
+    \includegraphics[bb=0 0 172 150, width=4cm]{images/42.png}
+  \end{center}
+  \caption{プレイヤー操作後の状態}
+  \label{fig:one}
+\end{figure}
+
+次に、プレイヤーキャラクターは、現在向いている方向に自動的に移動する。移動はスキップすることができない。（図4-3）
+
+\begin{figure}[htbp]
+  \begin{center}
+    \includegraphics[bb=0 0 172 150, width=4cm]{images/43.png}
+  \end{center}
+  \caption{ターン終了時の状態}
+  \label{fig:one}
+\end{figure}
+
 この一連の2つのステップを1ターンと定義する。プレイヤーはターンを終了状態に到達するまで繰り返し、
 これを1ゲームとする。
 \subsection{ゲームの終了条件}
@@ -34,19 +61,65 @@
 \subsubsection{岩}
 キャラクターは進入することができず、進行方向逆向きに方向を転換し、1マス進む。
 進むべき方向に別の岩がある場合、方向のみを切り替える。
+
+\begin{figure}[htbp]
+  \begin{center}
+    \includegraphics[bb=0 0 24 24, width=2.5cm]{images/rock.png}
+  \end{center}
+  \caption{岩}
+  \label{fig:one}
+\end{figure}
+
 \subsubsection{穴}
 プレイヤーキャラクターが進入するとゲームオーバーとなる。プレイヤー以外のキャラクターが進入すると消滅する。
+
+\begin{figure}[htbp]
+  \begin{center}
+    \includegraphics[bb=0 0 24 24, width=2.5cm]{images/hole.png}
+  \end{center}
+  \caption{穴}
+  \label{fig:one}
+\end{figure}
+
 \subsubsection{針}
 キャラクターが4方向のうち、針の向いている方向から進入すると、穴と同様でゲームオーバーになる。
 針のないその他の3方向から進入したとき、岩と同様の扱いとなる。
+
+\begin{figure}[htbp]
+  \begin{center}
+    \includegraphics[bb=0 0 24 24, width=2.5cm]{images/needle.png}
+  \end{center}
+  \caption{針}
+  \label{fig:one}
+\end{figure}
+
 \subsubsection{滑る床}
 プレイヤーキャラクターが進入すると、自動的に向いている方向にもう1マス進む。
 進んだ後に進入した床がさら滑る床だった場合、
 再帰的に進み続ける。
-\subsubsection{ジャンプ台}
-進入すると、向いている方向を1マス飛び越える。飛び越えたマスの効果は受けない。
+
+\begin{figure}[htbp]
+  \begin{center}
+    \includegraphics[bb=0 0 24 24, width=2.5cm]{images/ice.png}
+  \end{center}
+  \caption{滑る床}
+  \label{fig:one}
+\end{figure}
+
 \subsubsection{崩れる床}
 1度目の進入は通常の床として扱う。崩れる床から他のマスに移動したとき、崩れる床は穴に変化する。以降は穴として扱う。
+
+\begin{figure}[htbp]
+  \begin{center}
+    \includegraphics[bb=0 0 24 24, width=2.5cm]{images/broken.png}
+  \end{center}
+  \caption{崩れる床}
+  \label{fig:one}
+\end{figure}
+
+\subsubsection{ジャンプ台}
+進入すると、向いている方向を1マス飛び越える。飛び越えたマスの効果は受けない。
+
 \subsubsection{方向パネル}
 進入すると、現在の矢印の方向にキャラクターの向きを変える。
 
@@ -91,15 +164,27 @@
 
 
 \section{対象ゲームに特化したシステム設計}
-対象ゲームにおいて、前章において述べたOperationは、以下のようなデータ構造で記述できる
+対象ゲームにおいて、前章において述べたそれぞれのモデルは、以下のようなデータ構造で記述できる
+
+\subsection{Level}
+各「レベル」を定義するLevelモデルは以下の情報を保持すれば良いと考えられる
+
+\paragraph{map}
+マップ情報を定義する二次元配列を文字列としてJSON形式で格納している。ゲーム実行時にクライアント側でパースし、ステージとして読み込む
+
+\paragraph{optimized turn}
+ソルバーにより導出された最短手数が記録される
+
+\subsection{Operation}
+プレイヤーの行動を定義するOperationモデルは以下の情報を保持すれば良いと考えられる
 
 \paragraph{x}
-回転する4マスのうち、左上のマスのx座標
+回転する4マスのうち、左上のマスのx座標が記録される
 \paragraph{y}
-回転する4マスのうち、左上のマスのy座標
+回転する4マスのうち、左上のマスのy座標が記録される
 \paragraph{direction}
-回転方向を0または1で
+回転方向が0または1で記録される
 \paragraph{timestamp}
-Operationが発行された日時
+Operationが発行された日時がミリ秒単位で記録される
 
 このゲームにおいては、このOperationを保存しておくことで、プレイヤーの動きを完全に再現できる。
