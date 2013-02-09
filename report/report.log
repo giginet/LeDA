@@ -1,4 +1,4 @@
-This is e-pTeX, Version 3.1415926-p3.3-110825-2.4 (utf8.euc) (TeX Live 2012) (format=platex 2012.11.19)  4 FEB 2013 22:05
+This is e-pTeX, Version 3.1415926-p3.3-110825-2.4 (utf8.euc) (TeX Live 2012) (format=platex 2012.11.19)  10 FEB 2013 06:31
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -419,7 +419,7 @@ LaTeX Font Info:    Font shape `JY1/mc/bx/n' in size <17.28> not available
 (Font)              Font shape `JY1/gt/m/n' tried instead on input line 3.
 [1
 
-] [2]) (/Users/giginet/Documents/aptana3/crowd/report/chapter2.tex [3]
+]) (/Users/giginet/Documents/aptana3/crowd/report/chapter2.tex [2] [3]
 第 2 章
 [4
 
@@ -454,24 +454,33 @@ File: images/flow.png Graphic file (type eps)
 File: images/41.png Graphic file (type eps)
 <images/41.png>
 File: images/42.png Graphic file (type eps)
- <images/42.png>
-File: images/43.png Graphic file (type eps)
- <images/43.png> [15
+ <images/42.png> [15
 
 ]
+File: images/43.png Graphic file (type eps)
+ <images/43.png> [16]
 File: images/rock.png Graphic file (type eps)
- <images/rock.png> [16]
+ <images/rock.png>
 File: images/hole.png Graphic file (type eps)
 
-<images/hole.png>
+<images/hole.png> [17]
 File: images/needle.png Graphic file (type eps)
  <images/needle.png>
 File: images/ice.png Graphic file (type eps)
- <images/ice.png> [17]
+ <images/ice.png>
 File: images/broken.png Graphic file (type eps)
 
-<images/broken.png> [18] [19])
-(/Users/giginet/Documents/aptana3/crowd/report/bibliograpy.tex [20]) [21
+<images/broken.png> [18] [19] [20])
+(/Users/giginet/Documents/aptana3/crowd/report/chapter5.tex [21]
+第 5 章
+[22
+
+]) (/Users/giginet/Documents/aptana3/crowd/report/acknowledgment.tex
+[23]
+第 6 章
+) (/Users/giginet/Documents/aptana3/crowd/report/bibliograpy.tex [24
+
+]) [25
 
 ]
 (/Users/giginet/Documents/aptana3/crowd/report/report.aux)
@@ -483,13 +492,13 @@ LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 3791 strings out of 494059
- 50724 string characters out of 3156204
+ 3797 strings out of 494059
+ 50990 string characters out of 3156204
  136042 words of memory out of 3000000
  7136 multiletter control sequences out of 15000+200000
  37044 words of font info for 119 fonts, out of 3000000 for 9000
  745 hyphenation exceptions out of 8191
  33i,8n,58p,462b,271s stack positions out of 5000i,500n,10000p,200000b,50000s
 
-Output written on /Users/giginet/Documents/aptana3/crowd/report/report.dvi (24 
-pages, 63696 bytes).
+Output written on /Users/giginet/Documents/aptana3/crowd/report/report.dvi (28 
+pages, 72452 bytes).

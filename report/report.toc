@@ -6,7 +6,6 @@
 \contentsline {paragraph}{第3章}{2}
 \contentsline {paragraph}{第4章}{2}
 \contentsline {paragraph}{第5章}{3}
-\contentsline {paragraph}{第6章}{3}
 \contentsline {chapter}{\numberline {第2章}関連研究}{4}
 \contentsline {section}{\numberline {2.1}プレイログの収集に関する研究}{4}
 \contentsline {section}{\numberline {2.2}レベルデザインの改善に関する研究}{4}
@@ -40,35 +39,44 @@
 \contentsline {section}{\numberline {3.8}実装}{13}
 \contentsline {subsection}{\numberline {3.8.1}サーバーサイド}{13}
 \contentsline {subsection}{\numberline {3.8.2}クライアントサイド}{13}
-\contentsline {chapter}{\numberline {第4章}実験方法}{15}
-\contentsline {section}{\numberline {4.1}対象とするゲーム}{15}
-\contentsline {subsection}{\numberline {4.1.1}基本ルール}{15}
-\contentsline {subsection}{\numberline {4.1.2}ターンの流れ}{15}
-\contentsline {subsection}{\numberline {4.1.3}ゲームの終了条件}{16}
+\contentsline {chapter}{\numberline {第4章}対象とするゲーム}{15}
+\contentsline {section}{\numberline {4.1}はじめに}{15}
+\contentsline {section}{\numberline {4.2}ゲームの概要}{15}
+\contentsline {subsection}{\numberline {4.2.1}基本ルール}{15}
+\contentsline {subsection}{\numberline {4.2.2}ターンの流れ}{15}
+\contentsline {subsection}{\numberline {4.2.3}ゲームの終了条件}{16}
 \contentsline {subsubsection}{クリア条件}{16}
-\contentsline {subsubsection}{ゲームオーバー条件}{16}
-\contentsline {subsection}{\numberline {4.1.4}マップ上のギミック}{16}
+\contentsline {subsubsection}{ゲームオーバー条件}{17}
+\contentsline {subsection}{\numberline {4.2.4}マップ上のギミック}{17}
 \contentsline {subsubsection}{岩}{17}
 \contentsline {subsubsection}{穴}{17}
-\contentsline {subsubsection}{針}{17}
+\contentsline {subsubsection}{針}{18}
 \contentsline {subsubsection}{滑る床}{18}
 \contentsline {subsubsection}{崩れる床}{18}
-\contentsline {subsubsection}{ジャンプ台}{18}
-\contentsline {subsubsection}{方向パネル}{18}
-\contentsline {section}{\numberline {4.2}対象ゲームの採用目的}{18}
+\contentsline {subsubsection}{ジャンプ台}{19}
+\contentsline {subsubsection}{方向パネル}{19}
+\contentsline {section}{\numberline {4.3}対象ゲームの採用目的}{19}
 \contentsline {subsubsection}{操作が容易でプレイヤー間の実力差が出にくいため}{19}
 \contentsline {subsubsection}{確定完全情報ゲームであるため}{19}
 \contentsline {subsubsection}{リプレイ性が高いため}{19}
 \contentsline {subsubsection}{問題空間が小さく、解の探索が容易なため}{19}
-\contentsline {subsubsection}{レベル作成が非常に困難を極めるため}{19}
-\contentsline {section}{\numberline {4.3}対象ゲームの解の探索}{19}
-\contentsline {section}{\numberline {4.4}対象ゲームのレベル設計方法}{20}
-\contentsline {section}{\numberline {4.5}対象ゲームに特化したシステム設計}{20}
-\contentsline {subsection}{\numberline {4.5.1}Level}{20}
+\contentsline {subsubsection}{レベル作成が非常に困難を極めるため}{20}
+\contentsline {section}{\numberline {4.4}対象ゲームの解の探索}{20}
+\contentsline {section}{\numberline {4.5}対象ゲームのレベル設計方法}{20}
+\contentsline {section}{\numberline {4.6}対象ゲームに特化したシステム設計}{20}
+\contentsline {subsection}{\numberline {4.6.1}Level}{20}
 \contentsline {paragraph}{map}{20}
 \contentsline {paragraph}{optimized turn}{20}
-\contentsline {subsection}{\numberline {4.5.2}Operation}{20}
-\contentsline {paragraph}{x}{20}
-\contentsline {paragraph}{y}{20}
-\contentsline {paragraph}{direction}{20}
-\contentsline {paragraph}{timestamp}{20}
+\contentsline {subsection}{\numberline {4.6.2}Operation}{21}
+\contentsline {paragraph}{x}{21}
+\contentsline {paragraph}{y}{21}
+\contentsline {paragraph}{direction}{21}
+\contentsline {paragraph}{timestamp}{21}
+\contentsline {chapter}{\numberline {第5章}結論}{22}
+\contentsline {section}{\numberline {5.1}結果}{22}
+\contentsline {section}{\numberline {5.2}課題}{22}
+\contentsline {subsection}{\numberline {5.2.1}SPAMの判定とフィルタリング}{22}
+\contentsline {subsection}{\numberline {5.2.2}プレイヤー習熟度を考慮した統計処理}{22}
+\contentsline {subsection}{\numberline {5.2.3}汎用的なシステムの模索}{23}
+\contentsline {subsection}{\numberline {5.2.4}レベルの改善点検出とその修正}{23}
+\contentsline {chapter}{\numberline {第6章}謝辞}{24}
