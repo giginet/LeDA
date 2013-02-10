@@ -55,6 +55,19 @@ class MetricUpdateView(UpdateView, JSONResponseMixin):
         d.update({'pk' : self.object.pk})
         return self.get_json_response(self.convert_context_to_json(d))
 
+def get_metric_dict(metric):
+    u"""Metricのmodelをdict化します"""
+    begin = metric.created_at
+    def create_operation_dict(operation):
+        operation_dict = model_to_dict(operation)
+        delta = operation.created_at - begin
+        operation_dict.update({'offset' : float(delta.total_seconds())}) # ゲーム開始からの開始時間を秒で格納します
+        return operation_dict
+    operations = [create_operation_dict(operation) for operation in metric.operations.order_by('created_at')]
+    metric_dict = {'id' : metric.pk, 'stage' : metric.stage.pk, 'operations' : operations}
+    return metric_dict
+
+
 class MetricJSONView(JSONResponseMixin, DetailView):
     model = Metric
 
@@ -62,15 +75,7 @@ class MetricJSONView(JSONResponseMixin, DetailView):
         u"""
         Metric再生用のJSONを返却します
         """
-        begin = self.object.created_at
-        def create_operation_dict(operation):
-            operation_dict = model_to_dict(operation)
-            delta = operation.created_at - begin
-            operation_dict.update({'offset' : float(delta.total_seconds())}) # ゲーム開始からの開始時間を秒で格納します
-            return operation_dict
-        operations = [create_operation_dict(operation) for operation in self.object.operations.order_by('created_at')]
-        metric_dict = {'id' : self.object.pk, 'stage' : self.object.stage.pk, 'operations' : operations}
-        return self.get_json_response(self.convert_context_to_json(metric_dict))
+        return self.get_json_response(self.convert_context_to_json(get_metric_dict(self.object)))
 
 class MetricDetailView(DetailView):
     model = Metric

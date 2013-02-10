@@ -7,6 +7,7 @@ from django.forms.models import model_to_dict
 from django.utils import simplejson
 from django.views.generic.detail import BaseDetailView, DetailView
 from django.views.generic.list import BaseListView
+from metrics.views import get_metric_dict
 
 from Crowd.views import JSONResponseMixin
 from models import Level
@@ -44,4 +45,6 @@ class LevelMetricsJSONView(JSONResponseMixin, BaseDetailView):
 
     def render_to_response(self, context):
         level = self.get_object()
-        return self.get_json_response(self.convert_context_to_json(level.metrics))
+        metrics_dict = [get_metric_dict(metric) for metric in self.object.metrics.all()]
+        print metrics_dict
+        return self.get_json_response(self.convert_context_to_json(metrics_dict))
