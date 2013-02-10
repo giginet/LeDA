@@ -4,7 +4,7 @@ from django.core.urlresolvers import reverse
 from django.utils.functional import lazy
 from django.views.generic import ListView
 from models import Level
-from views import LevelDetailView, LevelJSONView, LevelRandomJSONView
+from views import LevelDetailView, LevelJSONView, LevelRandomJSONView, LevelMetricsJSONView
 
 __author__ = 'giginet'
 __version__ = '1.0.0'
@@ -16,4 +16,5 @@ urlpatterns = patterns('',
     url(r'^(?P<pk>\d+)/$', LevelDetailView.as_view(), name="levels_level_detail"),
     url(r'^(?P<pk>\d+)/json/$', LevelJSONView.as_view(), name="levels_level_json"),
     url(r'^json$', LevelRandomJSONView.as_view(), name="levels_level_random_json"),
+    url(r'^(?P<pk>\d+)/metrics/json/$', LevelMetricsJSONView.as_view(), name="levels_level_random_json"),
 )
