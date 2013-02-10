@@ -1,4 +1,4 @@
-This is e-pTeX, Version 3.1415926-p3.3-110825-2.4 (utf8.euc) (TeX Live 2012) (format=platex 2012.11.19)  10 FEB 2013 06:31
+This is e-pTeX, Version 3.1415926-p3.3-110825-2.4 (utf8.euc) (TeX Live 2012) (format=platex 2012.11.19)  10 FEB 2013 09:18
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -419,7 +419,7 @@ LaTeX Font Info:    Font shape `JY1/mc/bx/n' in size <17.28> not available
 (Font)              Font shape `JY1/gt/m/n' tried instead on input line 3.
 [1
 
-]) (/Users/giginet/Documents/aptana3/crowd/report/chapter2.tex [2] [3]
+] [2]) (/Users/giginet/Documents/aptana3/crowd/report/chapter2.tex [3]
 第 2 章
 [4
 
@@ -442,7 +442,7 @@ LaTeX Font Info:    Font shape `JY1/mc/bx/n' in size <14.4> not available
 ] [7]
 File: images/logo.png Graphic file (type eps)
  <images/logo.png>
-Overfull \hbox (249.86613pt too wide) in paragraph at lines 63--64
+Overfull \hbox (249.86613pt too wide) in paragraph at lines 65--66
  [] 
  []
 
@@ -501,4 +501,4 @@ Here is how much of TeX's memory you used:
  33i,8n,58p,462b,271s stack positions out of 5000i,500n,10000p,200000b,50000s
 
 Output written on /Users/giginet/Documents/aptana3/crowd/report/report.dvi (28 
-pages, 72452 bytes).
+pages, 72484 bytes).
