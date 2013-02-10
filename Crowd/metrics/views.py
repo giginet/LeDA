@@ -7,16 +7,19 @@ from django.forms.models import model_to_dict
 from django.core.urlresolvers import reverse
 from Crowd.views import JSONResponseMixin
 
+from players.models import Player
+
 class MetricCreateView(CreateView, JSONResponseMixin):
     model = Metric
     success_url = "/"
 
     def get_form_kwargs(self):
-        u"""ip_addressにIPアドレスを格納します"""
+        u"""PlayerにIPアドレスを格納します"""
         kwargs = super(MetricCreateView, self).get_form_kwargs()
         if kwargs.has_key('data'):
             qd = kwargs["data"].copy()
-            qd.update({"ip_address" : self.request.META['REMOTE_ADDR']})
+            player = Player.objects.get_or_create(ip_address=self.request.META['REMOTE_ADDR'])
+            qd.update({"player" : player})
             qd.update({"state" : 0})
             kwargs["data"] = qd
         return kwargs
@@ -37,7 +40,8 @@ class MetricUpdateView(UpdateView, JSONResponseMixin):
         kwargs = super(MetricUpdateView, self).get_form_kwargs()
         if kwargs.has_key('data'):
             qd = kwargs["data"].copy()
-            qd.update({"ip_address" : self.request.META['REMOTE_ADDR']})
+            player = Player.objects.get_or_create(ip_address=self.request.META['REMOTE_ADDR'])
+            qd.update({"player" : player})
             qd.update({"stage" : self.object.stage.pk})
             if self.object.pre_metric:
                 qd.update({"pre_metric" : self.object.pre_metric.pk})

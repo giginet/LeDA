@@ -13,6 +13,10 @@ class Operation(models.Model):
         (1, _('Right'))
     )
 
+    class Meta:
+        verbose_name = u"プレイログ"
+        verbose_name_plural = verbose_name
+
     x = models.PositiveSmallIntegerField(_('x'))
     y = models.PositiveSmallIntegerField(_('y'))
     metric = models.ForeignKey(Metric, related_name='operations')

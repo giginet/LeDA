@@ -4,6 +4,7 @@ from django.db import models
 from levels.models import Level
 from django.utils.translation import ugettext as _
 from django.db.models import Max
+from players.models import Player
 
 # Create your models here.
 
@@ -16,11 +17,15 @@ class Metric(models.Model):
         (2, _('GameOver'))
     )
 
+    player = models.ForeignKey(Player)
     stage = models.ForeignKey(Level, related_name='metrics')
     pre_metric = models.ForeignKey('Metric', null=True, blank=True)
-    ip_address = models.IPAddressField(_('IP Address'), blank=True, null=False)
     state = models.SmallIntegerField(_('State'), default=0, choices=STATE, blank=True, null=False)
     created_at = models.DateTimeField(_('Created At'), auto_now_add=True)
+
+    class Meta:
+        verbose_name = u"プレイログ"
+        verbose_name_plural = verbose_name
 
     def __unicode__(self):
         return self.stage.title
