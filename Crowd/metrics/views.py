@@ -18,8 +18,8 @@ class MetricCreateView(CreateView, JSONResponseMixin):
         kwargs = super(MetricCreateView, self).get_form_kwargs()
         if kwargs.has_key('data'):
             qd = kwargs["data"].copy()
-            player = Player.objects.get_or_create(ip_address=self.request.META['REMOTE_ADDR'])
-            qd.update({"player" : player})
+            player = Player.objects.get_or_create(ip_address=self.request.META['REMOTE_ADDR'])[0]
+            qd.update({"player" : player.pk})
             qd.update({"state" : 0})
             kwargs["data"] = qd
         return kwargs
@@ -40,8 +40,8 @@ class MetricUpdateView(UpdateView, JSONResponseMixin):
         kwargs = super(MetricUpdateView, self).get_form_kwargs()
         if kwargs.has_key('data'):
             qd = kwargs["data"].copy()
-            player = Player.objects.get_or_create(ip_address=self.request.META['REMOTE_ADDR'])
-            qd.update({"player" : player})
+            player = Player.objects.get_or_create(ip_address=self.request.META['REMOTE_ADDR'])[0]
+            qd.update({"player" : player.pk})
             qd.update({"stage" : self.object.stage.pk})
             if self.object.pre_metric:
                 qd.update({"pre_metric" : self.object.pre_metric.pk})

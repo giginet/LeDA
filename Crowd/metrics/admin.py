@@ -14,6 +14,6 @@ class MetricAdmin(admin.ModelAdmin):
     def play_time(obj):
         return obj.get_playtime()
 
-    list_display = ('stage', state_name, turn_count, play_time, 'created_at', 'ip_address')
+    list_display = ('stage', state_name, turn_count, play_time, 'created_at', 'player')
 
 admin.site.register(Metric, MetricAdmin)

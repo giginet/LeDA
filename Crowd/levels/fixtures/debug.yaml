@@ -90,7 +90,7 @@
   pk: 12
   fields:
     title: Touyu1
-    stage_file: stage_file: static/fixtures/map/other/touyu02.mwm
+    stage_file: static/fixtures/map/other/touyu02.mwm
     optimized_turn: 0
     created_at: 2013-01-15
     updated_at: 2013-01-15
@@ -98,7 +98,7 @@
   pk: 13
   fields:
     title: giginet
-    stage_file: stage_file: static/fixtures/map/other/giginet0.mwm
+    stage_file: static/fixtures/map/other/giginet0.mwm
     optimized_turn: 0
     created_at: 2013-01-15
     updated_at: 2013-01-15

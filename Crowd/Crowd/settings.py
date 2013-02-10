@@ -128,6 +128,8 @@ INSTALLED_APPS = (
     'levels',
     'metrics',
     'operations',
+    'players',
+    'questionnaires',
     # Uncomment the next line to enable the admin:
     # 'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
