@@ -2,7 +2,7 @@
 
 import os
 
-ROOT = os.path.abspath(os.path.curdir)
+ROOT = os.path.join(os.path.dirname(__file__), '../')
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
@@ -16,7 +16,7 @@ MANAGERS = ADMINS
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': 'leda.db',                      # Or path to database file if using sqlite3.
+        'NAME': os.path.join(os.path.dirname(__file__), '../', 'leda.db'),                      # Or path to database file if using sqlite3.
         'USER': '',                      # Not used with sqlite3.
         'PASSWORD': '',                  # Not used with sqlite3.
         'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
@@ -67,7 +67,9 @@ STATIC_ROOT = '/static/'
 STATIC_URL = '/static/'
 
 FIXTURE_DIRS = (
-        os.path.join(ROOT, 'Crowd/fixtures')
+        os.path.join(ROOT, 'Crowd/fixtures'),
+        os.path.join(os.path.dirname(__file__), '../', 'Crowd/fixtures'),
+        os.path.join(os.path.dirname(__file__), '../', 'levels/fixtures'),
 )
 
 # Additional locations of static files

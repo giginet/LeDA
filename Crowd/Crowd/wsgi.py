@@ -14,6 +14,25 @@ framework.
 
 """
 import os
+import sys
+# Activate virtualenv
+virtualenv = os.path.join(os.path.dirname(__file__), '../env')
+if os.path.exists(virtualenv):
+    activate_this = os.path.join(virtualenv, 'bin/activate_this.py')
+    execfile(activate_this, dict(__file__=activate_this))
+
+# Append Kawaz to the PYTHONPATH
+path_list = [
+    os.path.dirname(__file__),
+    os.path.join(os.path.dirname(__file__), '../'),
+    os.path.join(os.path.dirname(__file__), '../../'),
+]
+for path in path_list:
+    if path not in sys.path:
+        sys.path.append(path)
+
+# import django.core.handlers.wsgi
+# application = django.core.handlers.wsgi.WSGIHandler()
 
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "Crowd.settings")
 

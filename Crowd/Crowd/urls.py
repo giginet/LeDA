@@ -24,7 +24,7 @@ urlpatterns = patterns('',
 )
 
 from django.conf import settings
-if settings.DEBUG:
+if not settings.DEBUG:
     import os.path
     document_root = lambda x: os.path.join(os.path.dirname(__file__), '../static', x)
     urlpatterns += patterns('django.views.static',
