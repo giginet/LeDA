@@ -21,6 +21,10 @@ class Level(models.Model):
     created_at = models.DateTimeField(_('Created At'), auto_now_add=True, editable=False)
     updated_at = models.DateTimeField(_('Updated At'), auto_now=True, editable=False)
 
+    class Meta:
+        verbose_name = u"レベル"
+        verbose_name_plural = verbose_name
+
     def get_json(self):
         u"""ステージデータをJSONとして取り出します"""
         pass
