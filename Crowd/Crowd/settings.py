@@ -66,9 +66,9 @@ STATIC_ROOT = '/static/'
 # Example: "http://media.lawrence.com/static/"
 STATIC_URL = '/static/'
 
-FIXTURE_DIRS = {
+FIXTURE_DIRS = (
         os.path.join(ROOT, 'Crowd/fixtures')
-}
+)
 
 # Additional locations of static files
 STATICFILES_DIRS = (
