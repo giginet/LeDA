@@ -16,7 +16,10 @@ class LevelAdmin(admin.ModelAdmin):
     def defection_rate(obj):
         return str(obj.defection_rate) + "%"
 
+    def play_count(obj):
+        return obj.metrics.count()
+
     fields = ['stage_file', 'stage_data',]
-    list_display = ('title', gameover_rate, clear_rate, defection_rate)
+    list_display = ('title', play_count, gameover_rate, clear_rate, defection_rate)
 
 admin.site.register(Level, LevelAdmin)
