@@ -1,4 +1,4 @@
-This is e-pTeX, Version 3.1415926-p3.3-110825-2.4 (utf8.euc) (TeX Live 2012) (format=platex 2012.11.19)  10 FEB 2013 09:18
+This is e-pTeX, Version 3.1415926-p3.3-110825-2.4 (utf8.euc) (TeX Live 2012) (format=platex 2012.11.19)  12 FEB 2013 08:44
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -312,6 +312,21 @@ LaTeX Warning: Label `fig:one' multiply defined.
 
 LaTeX Warning: Label `fig:one' multiply defined.
 
+
+LaTeX Warning: Label `fig:one' multiply defined.
+
+
+LaTeX Warning: Label `fig:one' multiply defined.
+
+
+LaTeX Warning: Label `fig:one' multiply defined.
+
+
+LaTeX Warning: Label `fig:one' multiply defined.
+
+
+LaTeX Warning: Label `fig:one' multiply defined.
+
 )
 \openout1 = `report.aux'.
 
@@ -419,19 +434,19 @@ LaTeX Font Info:    Font shape `JY1/mc/bx/n' in size <17.28> not available
 (Font)              Font shape `JY1/gt/m/n' tried instead on input line 3.
 [1
 
-] [2]) (/Users/giginet/Documents/aptana3/crowd/report/chapter2.tex [3]
-第 2 章
-[4
-
 ]
-LaTeX Font Info:    Try loading font information for OMS+txr on input line 25.
+LaTeX Font Info:    Try loading font information for OMS+txr on input line 39.
  (/usr/local/texlive/2012/texmf-dist/tex/latex/txfonts/omstxr.fd
 File: omstxr.fd 2000/12/15 v3.1
 )
 LaTeX Font Info:    Font shape `OMS/txr/m/n' in size <12> not available
-(Font)              Font shape `OMS/txsy/m/n' tried instead on input line 25.
-)
-(/Users/giginet/Documents/aptana3/crowd/report/chapter3.tex [5]
+(Font)              Font shape `OMS/txsy/m/n' tried instead on input line 39.
+ [2])
+(/Users/giginet/Documents/aptana3/crowd/report/chapter2.tex [3]
+第 2 章
+[4
+
+]) (/Users/giginet/Documents/aptana3/crowd/report/chapter3.tex [5]
 第 3 章
 LaTeX Font Info:    Font shape `JT1/mc/bx/n' in size <14.4> not available
 (Font)              Font shape `JT1/gt/m/n' tried instead on input line 7.
@@ -441,46 +456,60 @@ LaTeX Font Info:    Font shape `JY1/mc/bx/n' in size <14.4> not available
 
 ] [7]
 File: images/logo.png Graphic file (type eps)
- <images/logo.png>
-Overfull \hbox (249.86613pt too wide) in paragraph at lines 65--66
- [] 
- []
+ <images/logo.png> [8]
+File: images/levels.png Graphic file (type eps)
+ <images/levels.png>
+File: images/players.png Graphic file (type eps)
+ <images/players.png> [9]
+File: images/level.png Graphic file (type eps)
 
-[8] [9] [10]
+<images/level.png>
+File: images/metric.png Graphic file (type eps)
+ <images/metric.png> [10] [11] [12]
 File: images/flow.png Graphic file (type eps)
- <images/flow.png> [11] [12] [13])
-(/Users/giginet/Documents/aptana3/crowd/report/chapter4.tex [14]
+ <images/flow.png>
+[13] [14] [15]) (/Users/giginet/Documents/aptana3/crowd/report/chapter4.tex
+[16]
 第 4 章
 File: images/41.png Graphic file (type eps)
 <images/41.png>
 File: images/42.png Graphic file (type eps)
- <images/42.png> [15
+ <images/42.png> [17
 
 ]
 File: images/43.png Graphic file (type eps)
- <images/43.png> [16]
+ <images/43.png> [18]
 File: images/rock.png Graphic file (type eps)
  <images/rock.png>
 File: images/hole.png Graphic file (type eps)
 
-<images/hole.png> [17]
+<images/hole.png> [19]
 File: images/needle.png Graphic file (type eps)
  <images/needle.png>
 File: images/ice.png Graphic file (type eps)
  <images/ice.png>
 File: images/broken.png Graphic file (type eps)
 
-<images/broken.png> [18] [19] [20])
-(/Users/giginet/Documents/aptana3/crowd/report/chapter5.tex [21]
+<images/broken.png> [20] [21]
+File: images/json.png Graphic file (type eps)
+ <images/json.png>
+(I search kanjifont definition file: . . ) (I search font definition file: . .
+. . . . . )
+LaTeX Font Info:    Try loading font information for OT1+txtt on input line 174
+.
+ (/usr/local/texlive/2012/texmf-dist/tex/latex/txfonts/ot1txtt.fd
+File: ot1txtt.fd 2000/12/15 v3.1
+)
+[22]) (/Users/giginet/Documents/aptana3/crowd/report/chapter5.tex [23]
 第 5 章
-[22
+[24
 
 ]) (/Users/giginet/Documents/aptana3/crowd/report/acknowledgment.tex
-[23]
+[25]
 第 6 章
-) (/Users/giginet/Documents/aptana3/crowd/report/bibliograpy.tex [24
+) (/Users/giginet/Documents/aptana3/crowd/report/bibliograpy.tex [26
 
-]) [25
+]) [27
 
 ]
 (/Users/giginet/Documents/aptana3/crowd/report/report.aux)
@@ -492,13 +521,13 @@ LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 3797 strings out of 494059
- 50990 string characters out of 3156204
- 136042 words of memory out of 3000000
- 7136 multiletter control sequences out of 15000+200000
- 37044 words of font info for 119 fonts, out of 3000000 for 9000
+ 3845 strings out of 494059
+ 51641 string characters out of 3156204
+ 137042 words of memory out of 3000000
+ 7167 multiletter control sequences out of 15000+200000
+ 37320 words of font info for 120 fonts, out of 3000000 for 9000
  745 hyphenation exceptions out of 8191
- 33i,8n,58p,462b,271s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 33i,8n,58p,462b,304s stack positions out of 5000i,500n,10000p,200000b,50000s
 
-Output written on /Users/giginet/Documents/aptana3/crowd/report/report.dvi (28 
-pages, 72484 bytes).
+Output written on /Users/giginet/Documents/aptana3/crowd/report/report.dvi (30 
+pages, 79876 bytes).

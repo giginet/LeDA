@@ -1,4 +1,4 @@
-This is e-pTeX, Version 3.1415926-p3.3-110825-2.4 (utf8.euc) (TeX Live 2012) (format=platex 2012.11.19)  31 JAN 2013 16:58
+This is e-pTeX, Version 3.1415926-p3.3-110825-2.4 (utf8.euc) (TeX Live 2012) (format=platex 2012.11.19)  12 FEB 2013 07:39
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -18,11 +18,11 @@ lovak, slovenian, spanish, swedish, turkish, turkmen, ukrainian, uppersorbian,
 welsh, loaded.
 ! Undefined control sequence.
 l.1 \chapter
-            {実験方法}
+            {対象とするゲーム}
 ? 
 ! Emergency stop.
 l.1 \chapter
-            {実験方法}
+            {対象とするゲーム}
 End of file on the terminal!
 
  
@@ -33,5 +33,5 @@ Here is how much of TeX's memory you used:
  3531 multiletter control sequences out of 15000+200000
  7519 words of font info for 31 fonts, out of 3000000 for 9000
  745 hyphenation exceptions out of 8191
- 5i,0n,1p,79b,8s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 5i,0n,1p,87b,8s stack positions out of 5000i,500n,10000p,200000b,50000s
 No pages of output.
